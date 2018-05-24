@@ -1,35 +1,33 @@
 import javax.swing.*;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class BoardGUI {
+class BoardGUI {
 
     private boolean gameActive = false;
-    Minefield mf;
     private int rows;
     private int cols;
     private int mines;
     private Timer timer;
     private JLabel flagLabel;
     private boolean devMode = false;
-    private Color colors[] = {Color.black, Color.blue,Color.green,Color.red,Color.cyan,Color.orange,Color.pink,Color.MAGENTA,Color.BLACK};
+    private Color colors[] = {Color.black, Color.blue, Color.green, Color.red, Color.cyan, Color.orange, Color.pink, Color.MAGENTA, Color.BLACK};
 
-    public BoardGUI(int rows, int cols, int mines) {
+    BoardGUI(int rows, int cols, int mines) {
         this.rows = rows;
         this.cols = cols;
         this.mines = mines;
-        mf = new Minefield(rows,cols,mines);
+        Minefield mf = new Minefield(rows, cols, mines);
         JFrame frame = new JFrame("Minesweeper");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.setSize(47*cols, 47*rows + 100);
+        frame.setSize(cols * 47, rows * 47 + 100);
         frame.setResizable(false);
         frame.add(minefieldPanel(mf, frame), BorderLayout.CENTER);
-        frame.add(systemPanel(mf,frame), BorderLayout.SOUTH);
+        frame.add(systemPanel(mf, frame), BorderLayout.SOUTH);
         frame.add(timePanel(), BorderLayout.NORTH);
         frame.setVisible(true);
     }
@@ -43,7 +41,6 @@ public class BoardGUI {
                 minefieldButtons[i][j] = new JButton();
                 minefieldButtons[i][j].setBackground(new Color(255, 255, 255));
                 minefieldButtons[i][j].setFocusable(false);
-
                 minefieldPanel.add(minefieldButtons[i][j]);
             }
         }
@@ -62,7 +59,7 @@ public class BoardGUI {
                                 if (devMode) {
                                     for (int k = 0; k < rows; k++) {
                                         for (int l = 0; l < cols; l++) {
-                                            if (mf.getValue(k,l) == -1) {
+                                            if (mf.getValue(k, l) == -1) {
                                                 minefieldButtons[k][l].setText("*");
                                             }
                                         }
@@ -75,35 +72,35 @@ public class BoardGUI {
                                 for (int k = -1; k < 2; k++) {
                                     for (int l = -1; l < 2; l++) {
                                         if (row + k >= 0 && row + k < rows && col + l >= 0 && col + l < cols) {
-                                            digMine(row+k,col+l);
+                                            digMine(row + k, col + l);
                                         }
                                     }
                                 }
                             }
-                            if (mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines && mf.getNumUncovered() == rows*cols-mines) {
+                            if (mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines && mf.getNumUncovered() == rows * cols - mines) {
                                 timer.stop();
                                 JOptionPane.showMessageDialog(minefieldPanel, "You win!");
                                 frame.dispose();
                                 new MenuGUI();
                             }
                         } else if (gameActive && mouseEvent.getButton() == 3) {
-                            if (!mf.isUncovered(row,col)) {
+                            if (!mf.isUncovered(row, col)) {
                                 if (mf.isFlagged(row, col)) {
                                     mf.unflag(row, col);
                                     minefieldButtons[row][col].setText("");
-                                    flagLabel.setText(mf.getFlagCounter()+"/"+mines);
+                                    flagLabel.setText(mf.getFlagCounter() + "/" + mines);
                                 } else {
                                     mf.flag(row, col);
                                     minefieldButtons[row][col].setText("^");
-                                    flagLabel.setText(mf.getFlagCounter()+"/"+mines);
+                                    flagLabel.setText(mf.getFlagCounter() + "/" + mines);
                                 }
-                                if (mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines && mf.getNumUncovered() == rows*cols-mines) {
+                                if (mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines && mf.getNumUncovered() == rows * cols - mines) {
                                     timer.stop();
                                     JOptionPane.showMessageDialog(minefieldPanel, "You win!");
                                     frame.dispose();
                                     new MenuGUI();
-                                } else if(mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines) {
-                                    System.out.println(mf.getNumUncovered() +" : "+ ((rows*cols)-mines));
+                                } else if (mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines) {
+                                    System.out.println(mf.getNumUncovered() + " : " + ((rows * cols) - mines));
                                 }
                             }
                         }
@@ -128,16 +125,16 @@ public class BoardGUI {
                     }
 
                     private void digMine(int row, int col) {
-                        if (!mf.isFlagged(row,col)) {
+                        if (!mf.isFlagged(row, col)) {
                             minefieldButtons[row][col].setBackground(new Color(0, 190, 255));
                         }
-                        if (mf.getValue(row, col) == -1 && !mf.isFlagged(row,col)) {
+                        if (mf.getValue(row, col) == -1 && !mf.isFlagged(row, col)) {
                             showBombs(mf);
                             timer.stop();
                             JOptionPane.showMessageDialog(minefieldPanel, "Game Over!");
                             frame.dispose();
                             new MenuGUI();
-                        } else if (!mf.isUncovered(row, col) && !mf.isFlagged(row,col)) {
+                        } else if (!mf.isUncovered(row, col) && !mf.isFlagged(row, col)) {
                             mf.checkAdjecency(row, col);
                             mf.uncover(row, col);
                             if (mf.getValue(row, col) == 0) {
@@ -153,7 +150,7 @@ public class BoardGUI {
                         for (int i = -1; i < 2; i++) {
                             for (int j = -1; j < 2; j++) {
                                 if (row + i >= 0 && row + i < rows && col + j >= 0 && col + j < cols && !mf.isUncovered(row + i, col + j)) {
-                                    digMine(row+i,col+j);
+                                    digMine(row + i, col + j);
                                 }
                             }
                         }
@@ -178,38 +175,28 @@ public class BoardGUI {
     private JPanel systemPanel(Minefield mf, JFrame frame) {
         JPanel systemPanel = new JPanel();
         flagLabel = new JLabel();
-        flagLabel.setText(mf.getFlagCounter()+"/"+mines);
+        flagLabel.setText(mf.getFlagCounter() + "/" + mines);
         systemPanel.add(flagLabel);
         JButton changeBoardButton = new JButton();
         changeBoardButton.setText("Change Board");
-        changeBoardButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                frame.dispose();
-                new MenuGUI();
-            }
+        changeBoardButton.addActionListener(actionEvent -> {
+            frame.dispose();
+            new MenuGUI();
         });
         changeBoardButton.setFocusable(false);
         systemPanel.add(changeBoardButton);
         JButton restartButton = new JButton();
         restartButton.setText("Restart");
-        restartButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                frame.dispose();
-                new BoardGUI(rows,cols,mines);
-            }
+        restartButton.addActionListener(actionEvent -> {
+            frame.dispose();
+            new BoardGUI(rows, cols, mines);
         });
         restartButton.setFocusable(false);
         systemPanel.add(restartButton);
         JButton quitButton = new JButton();
         quitButton.setText("Quit");
-        quitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                System.exit(0);
-            }
-        });
+        quitButton.addActionListener(actionEvent ->
+                System.exit(0));
         quitButton.setFocusable(false);
         systemPanel.add(quitButton);
         return systemPanel;
@@ -225,14 +212,14 @@ public class BoardGUI {
 
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (count%60 < 10 && count/60 <10) {
-                    timeLabel.setText("0"+count/60+":0"+count%60);
-                } else if(count%60 >= 10 && count/60 <10) {
-                    timeLabel.setText("0"+count/60+":"+count%60);
-                } else if(count%60 < 10 && count/60 >=10) {
-                    timeLabel.setText(count/60+":0"+count%60);
-                } else if(count%60 >= 10 && count/60 >=10) {
-                    timeLabel.setText(count/60+":"+count%60);
+                if (count % 60 < 10 && count / 60 < 10) {
+                    timeLabel.setText("0" + count / 60 + ":0" + count % 60);
+                } else if (count % 60 >= 10 && count / 60 < 10) {
+                    timeLabel.setText("0" + count / 60 + ":" + count % 60);
+                } else if (count % 60 < 10 && count / 60 >= 10) {
+                    timeLabel.setText(count / 60 + ":0" + count % 60);
+                } else if (count % 60 >= 10 && count / 60 >= 10) {
+                    timeLabel.setText(count / 60 + ":" + count % 60);
                 }
                 count++;
             }

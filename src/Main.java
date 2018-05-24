@@ -6,7 +6,7 @@ public class Main {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (Exception e) {
-            //do nothing
+            System.exit(0);
         }
         new MenuGUI();
     }

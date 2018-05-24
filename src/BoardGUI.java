@@ -57,39 +57,27 @@ class BoardGUI {
                                 gameActive = true;
                                 mf.generateMinefield(row, col);
                                 if (devMode) {
-                                    for (int k = 0; k < rows; k++) {
-                                        for (int l = 0; l < cols; l++) {
-                                            if (mf.getValue(k, l) == -1) {
-                                                minefieldButtons[k][l].setText("*");
+                                    showBombs(mf);
+                                }
+                            }
+                            if (!mf.isUncovered(row, col) && !mf.isFlagged(row, col)) {
+                                int value = mf.digMine(row, col);
+                                if (value == -1) {
+                                    gameOver();
+                                }
+                            } else if (mf.isUncovered(row, col) && mf.getValue(row, col) != 0 && mf.checkAdjecentFlags(row, col) == mf.getValue(row, col)) {
+                                for (int k = -1; k < 2; k++) {
+                                    for (int l = -1; l < 2; l++) {
+                                        if (row + k >= 0 && row + k < rows && col + l >= 0 && col + l < cols) {
+                                            int value = mf.digMine(row + k, col + l);
+                                            if (value == -1) {
+                                                gameOver();
                                             }
                                         }
                                     }
                                 }
                             }
-                            if (!mf.isUncovered(row, col) && !mf.isFlagged(row, col)) {
-                                minefieldButtons[row][col].setBackground(new Color(0, 190, 255));
-                                int value = mf.digMine(row, col);
-                                System.out.println(value);
-                                if (value == -1) {
-                                    showBombs(mf);
-                                    timer.stop();
-                                    JOptionPane.showMessageDialog(minefieldPanel, "Game Over!");
-                                    frame.dispose();
-                                    new MenuGUI();
-                                } else if (value > 0) {
-                                    minefieldButtons[row][col].setForeground(colors[mf.getValue(row, col)]);
-                                    minefieldButtons[row][col].setText(value + "");
-                                }
-                                mf.digMine(row, col);
-                            } else if (mf.isUncovered(row, col) && mf.getValue(row, col) != 0 && mf.checkAdjecentFlags(row, col) == mf.getValue(row, col)) {
-                                for (int k = -1; k < 2; k++) {
-                                    for (int l = -1; l < 2; l++) {
-                                        if (row + k >= 0 && row + k < rows && col + l >= 0 && col + l < cols) {
-                                            mf.digMine(row + k, col + l);
-                                        }
-                                    }
-                                }
-                            }
+                            repaintBoard(minefieldButtons,mf);
                             if (mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines && mf.getNumUncovered() == rows * cols - mines) {
                                 timer.stop();
                                 JOptionPane.showMessageDialog(minefieldPanel, "You win!");
@@ -137,47 +125,26 @@ class BoardGUI {
 
                     }
 
-//                    private void digMine(int row, int col) {
-//                        if (!mf.isFlagged(row, col)) {
-//                            minefieldButtons[row][col].setBackground(new Color(0, 190, 255));
-//                        }
-//                        if (mf.getValue(row, col) == -1 && !mf.isFlagged(row, col)) {
-//                            showBombs(mf);
-//                            timer.stop();
-//                            JOptionPane.showMessageDialog(minefieldPanel, "Game Over!");
-//                            frame.dispose();
-//                            new MenuGUI();
-//                        } else if (!mf.isUncovered(row, col) && !mf.isFlagged(row, col)) {
-//                            mf.checkAdjecency(row, col);
-//                            mf.uncover(row, col);
-//                            if (mf.getValue(row, col) == 0) {
-//                                eliminate(row, col, mf);
-//                            } else {
-//                                minefieldButtons[row][col].setForeground(colors[mf.getValue(row, col)]);
-//                                minefieldButtons[row][col].setText(mf.getValue(row, col) + "");
-//                            }
-//                        }
-//                    }
-
-//                    private void eliminate(int row, int col, Minefield mf) {
-//                        for (int i = -1; i < 2; i++) {
-//                            for (int j = -1; j < 2; j++) {
-//                                if (row + i >= 0 && row + i < rows && col + j >= 0 && col + j < cols && !mf.isUncovered(row + i, col + j)) {
-//                                    digMine(row + i, col + j);
-//                                }
-//                            }
-//                        }
-//                    }
-
                     private void showBombs(Minefield mf) {
                         for (int i = 0; i < rows; i++) {
                             for (int j = 0; j < cols; j++) {
                                 if (mf.getValue(i, j) == -1) {
-                                    minefieldButtons[row][col].setForeground(Color.black);
-                                    minefieldButtons[i][j].setText("*");
+                                    if (!mf.isFlagged(i,j)) {
+                                        minefieldButtons[i][j].setText("*");
+                                    }
+                                } else if (mf.isFlagged(i,j)) {
+                                    minefieldButtons[i][j].setText("x");
                                 }
                             }
                         }
+                    }
+
+                    private void gameOver() {
+                        showBombs(mf);
+                        timer.stop();
+                        JOptionPane.showMessageDialog(minefieldPanel, "Game Over!");
+                        frame.dispose();
+                        new MenuGUI();
                     }
                 });
             }
@@ -253,5 +220,4 @@ class BoardGUI {
             }
         }
     }
-
 }

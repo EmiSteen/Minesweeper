@@ -15,6 +15,7 @@ class BoardGUI {
     private JLabel flagLabel;
     private boolean devMode = false;
     private Color colors[] = {Color.black, Color.blue, Color.green, Color.red, Color.cyan, Color.orange, Color.pink, Color.MAGENTA, Color.BLACK};
+    private Color uncoveredColor = new Color(0, 190, 255);
 
     BoardGUI(int rows, int cols, int mines) {
         this.rows = rows;
@@ -63,26 +64,17 @@ class BoardGUI {
                             if (!mf.isUncovered(row, col) && !mf.isFlagged(row, col)) {
                                 int value = mf.digMine(row, col);
                                 if (value == -1) {
-                                    gameOver();
+                                    gameOver(0);
                                 }
                             } else if (mf.isUncovered(row, col) && mf.getValue(row, col) != 0 && mf.checkAdjecentFlags(row, col) == mf.getValue(row, col)) {
-                                for (int k = -1; k < 2; k++) {
-                                    for (int l = -1; l < 2; l++) {
-                                        if (row + k >= 0 && row + k < rows && col + l >= 0 && col + l < cols) {
-                                            int value = mf.digMine(row + k, col + l);
-                                            if (value == -1) {
-                                                gameOver();
-                                            }
-                                        }
-                                    }
+                                if (digAdjecent()) {
+                                    repaintBoard(minefieldButtons, mf);
+                                    gameOver(0);
                                 }
                             }
-                            repaintBoard(minefieldButtons,mf);
+                            repaintBoard(minefieldButtons, mf);
                             if (mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines && mf.getNumUncovered() == rows * cols - mines) {
-                                timer.stop();
-                                JOptionPane.showMessageDialog(minefieldPanel, "You win!");
-                                frame.dispose();
-                                new MenuGUI();
+                                gameOver(1);
                             }
                         } else if (gameActive && mouseEvent.getButton() == 3) {
                             if (!mf.isUncovered(row, col)) {
@@ -96,12 +88,7 @@ class BoardGUI {
                                     flagLabel.setText(mf.getFlagCounter() + "/" + mines);
                                 }
                                 if (mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines && mf.getNumUncovered() == rows * cols - mines) {
-                                    timer.stop();
-                                    JOptionPane.showMessageDialog(minefieldPanel, "You win!");
-                                    frame.dispose();
-                                    new MenuGUI();
-                                } else if (mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines) {
-                                    System.out.println(mf.getNumUncovered() + " : " + ((rows * cols) - mines));
+                                    gameOver(1);
                                 }
                             }
                         }
@@ -129,23 +116,45 @@ class BoardGUI {
                         for (int i = 0; i < rows; i++) {
                             for (int j = 0; j < cols; j++) {
                                 if (mf.getValue(i, j) == -1) {
-                                    if (!mf.isFlagged(i,j)) {
+                                    if (!mf.isFlagged(i, j)) {
                                         minefieldButtons[i][j].setText("*");
                                     }
-                                } else if (mf.isFlagged(i,j)) {
+                                } else if (mf.isFlagged(i, j)) {
                                     minefieldButtons[i][j].setText("x");
                                 }
                             }
                         }
                     }
 
-                    private void gameOver() {
+                    private boolean digAdjecent() {
+                        boolean foundMine = false;
+                        for (int k = -1; k < 2; k++) {
+                            for (int l = -1; l < 2; l++) {
+                                if (row + k >= 0 && row + k < rows && col + l >= 0 && col + l < cols) {
+                                    if (mf.digMine(row + k, col + l) == -1 ) {
+                                        foundMine = true;
+                                    }
+                                    if (!mf.isFlagged(row+k,col+l)) {
+                                        minefieldButtons[row + k][col + l].setBackground(uncoveredColor);
+                                    }
+                                }
+                            }
+                        }
+                        return foundMine;
+                    }
+
+                    private void gameOver(int status) {
                         showBombs(mf);
                         timer.stop();
-                        JOptionPane.showMessageDialog(minefieldPanel, "Game Over!");
+                        if (status == 0) {
+                            JOptionPane.showMessageDialog(minefieldPanel, "Game Over!");
+                        } else if (status == 1) {
+                            JOptionPane.showMessageDialog(minefieldPanel, "You win!");
+                        }
                         frame.dispose();
                         new MenuGUI();
                     }
+
                 });
             }
         }
@@ -210,11 +219,11 @@ class BoardGUI {
     private void repaintBoard(JButton[][] minefieldButtons, Minefield mf) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if (mf.isUncovered(i,j)) {
-                    minefieldButtons[i][j].setBackground(new Color(0, 190, 255));
-                    if (mf.getValue(i,j)>0) {
-                        minefieldButtons[i][j].setText(mf.getValue(i,j)+ "");
-                        minefieldButtons[i][j].setForeground(colors[mf.getValue(i,j)]);
+                if (mf.isUncovered(i, j)) {
+                    minefieldButtons[i][j].setBackground(uncoveredColor);
+                    if (mf.getValue(i, j) > 0) {
+                        minefieldButtons[i][j].setText(mf.getValue(i, j) + "");
+                        minefieldButtons[i][j].setForeground(colors[mf.getValue(i, j)]);
                     }
                 }
             }

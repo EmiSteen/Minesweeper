@@ -158,7 +158,7 @@ class Minefield {
     }
 
     int digMine(int row, int col) {
-        if (getValue(row,col) == -1 && !isFlagged(row, col)) {
+        if (!isUncovered(row,col) && getValue(row,col) == -1 && !isFlagged(row, col)) {
             return -1;
         } else if (!isUncovered(row, col) && !isFlagged(row, col)) {
             checkAdjecency(row, col);

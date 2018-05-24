@@ -16,7 +16,6 @@ class BoardGUI {
     private boolean devMode = false;
     private Color colors[] = {Color.black, Color.blue, Color.green, Color.red, Color.cyan, Color.orange, Color.pink, Color.MAGENTA, Color.BLACK};
     private Color uncoveredColor = new Color(0, 190, 255);
-
     BoardGUI(int rows, int cols, int mines) {
         this.rows = rows;
         this.cols = cols;
@@ -58,7 +57,7 @@ class BoardGUI {
                                 gameActive = true;
                                 mf.generateMinefield(row, col);
                                 if (devMode) {
-                                    showBombs(mf);
+                                    showBombs();
                                 }
                             }
                             if (!mf.isUncovered(row, col) && !mf.isFlagged(row, col)) {
@@ -112,7 +111,7 @@ class BoardGUI {
 
                     }
 
-                    private void showBombs(Minefield mf) {
+                    private void showBombs() {
                         for (int i = 0; i < rows; i++) {
                             for (int j = 0; j < cols; j++) {
                                 if (mf.getValue(i, j) == -1) {
@@ -131,10 +130,10 @@ class BoardGUI {
                         for (int k = -1; k < 2; k++) {
                             for (int l = -1; l < 2; l++) {
                                 if (row + k >= 0 && row + k < rows && col + l >= 0 && col + l < cols) {
-                                    if (mf.digMine(row + k, col + l) == -1 ) {
+                                    if (mf.digMine(row + k, col + l) == -1) {
                                         foundMine = true;
                                     }
-                                    if (!mf.isFlagged(row+k,col+l)) {
+                                    if (!mf.isFlagged(row + k, col + l)) {
                                         minefieldButtons[row + k][col + l].setBackground(uncoveredColor);
                                     }
                                 }
@@ -144,7 +143,7 @@ class BoardGUI {
                     }
 
                     private void gameOver(int status) {
-                        showBombs(mf);
+                        showBombs();
                         timer.stop();
                         if (status == 0) {
                             JOptionPane.showMessageDialog(minefieldPanel, "Game Over!");

@@ -53,7 +53,7 @@ class Minefield {
         return minefield[row][col];
     }
 
-    void checkAdjecency(int row, int col) {
+    private void checkAdjecency(int row, int col) {
         int adjecent = 0;
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
@@ -85,7 +85,7 @@ class Minefield {
         flagCounter--;
     }
 
-    void uncover(int row, int col) {
+    private void uncover(int row, int col) {
         state[row][col] = 1;
         incrementUncovered();
     }
@@ -106,30 +106,30 @@ class Minefield {
         return adjecentFlags;
     }
 
-//    Unused method t print a grid
-//    private void printGrid(int grid[][]) {
-//        System.out.print("+");
-//        for (int i = 0; i < rows; i++) {
-//            System.out.print("---+");
-//        }
-//        System.out.println();
-//        for (int i = 0; i < rows; i++) {
-//            System.out.print("| ");
-//            for (int j = 0; j < rows; j++) {
-//                if (grid[i][j] != -1) {
-//                    System.out.print(grid[i][j] + " | ");
-//                } else {
-//                    System.out.print("*" + " | ");
-//                }
-//            }
-//            System.out.println();
-//            System.out.print("+");
-//            for (int j = 0; j < rows; j++) {
-//                System.out.print("---+");
-//            }
-//            System.out.println();
-//        }
-//    }
+//    Unused method to print a grid
+    private void printGrid(int grid[][]) {
+        System.out.print("+");
+        for (int i = 0; i < rows; i++) {
+            System.out.print("---+");
+        }
+        System.out.println();
+        for (int i = 0; i < rows; i++) {
+            System.out.print("| ");
+            for (int j = 0; j < rows; j++) {
+                if (grid[i][j] != -1) {
+                    System.out.print(grid[i][j] + " | ");
+                } else {
+                    System.out.print("*" + " | ");
+                }
+            }
+            System.out.println();
+            System.out.print("+");
+            for (int j = 0; j < rows; j++) {
+                System.out.print("---+");
+            }
+            System.out.println();
+        }
+    }
 
 //    unused method to print the state of fields of the board
 //    private void printState() {
@@ -137,9 +137,9 @@ class Minefield {
 //    }
 
 //    unused method to print the minefield board
-//    private void printMinefield() {
-//        printGrid(minefield);
-//    }
+    private void printMinefield() {
+        printGrid(minefield);
+    }
 
     int getCorrectFlagCounter() {
         return this.correctFlagCounter;
@@ -155,6 +155,35 @@ class Minefield {
 
     int getNumUncovered() {
         return this.numUncovered;
+    }
+
+    int digMine(int row, int col) {
+        if (getValue(row,col) == -1 && !isFlagged(row, col)) {
+            return -1;
+        } else if (!isUncovered(row, col) && !isFlagged(row, col)) {
+            checkAdjecency(row, col);
+            uncover(row, col);
+            if (getValue(row, col) == 0) {
+                eliminate(row, col);
+            } else {
+                return getValue(row, col);
+            }
+        } else {
+            return -2;
+        }
+        printMinefield();
+        return 0;
+    }
+
+    private void eliminate(int row, int col) {
+        System.out.println("here");
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                if (row + i >= 0 && row + i < rows && col + j >= 0 && col + j < cols && !isUncovered(row + i, col + j)) {
+                    digMine(row + i, col + j);
+                }
+            }
+        }
     }
 
 }

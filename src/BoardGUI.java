@@ -15,7 +15,9 @@ class BoardGUI {
     private JLabel flagLabel;
     private boolean devMode = false;
     private Color colors[] = {Color.black, Color.blue, Color.green, Color.red, Color.cyan, Color.orange, Color.pink, Color.MAGENTA, Color.BLACK};
-    private Color uncoveredColor = new Color(0, 190, 255);
+    private Color uncoveredColor = new Color(200, 200, 255);
+    private Color alternateTileColors[] = {new Color(255, 255, 255),new Color(0, 190, 255)};
+
     BoardGUI(int rows, int cols, int mines) {
         this.rows = rows;
         this.cols = cols;
@@ -36,12 +38,24 @@ class BoardGUI {
         JPanel minefieldPanel = new JPanel();
         minefieldPanel.setLayout(new GridLayout(rows, cols));
         JButton minefieldButtons[][] = new JButton[rows][cols];
+        int colorCount;
         for (int i = 0; i < rows; i++) {
+            if (i%2==0) {
+                colorCount = 0;
+            } else {
+                colorCount = 1;
+            }
             for (int j = 0; j < cols; j++) {
                 minefieldButtons[i][j] = new JButton();
-                minefieldButtons[i][j].setBackground(new Color(255, 255, 255));
+
                 minefieldButtons[i][j].setFocusable(false);
                 minefieldPanel.add(minefieldButtons[i][j]);
+                if (colorCount%2==0){
+                    minefieldButtons[i][j].setBackground(alternateTileColors[0]);
+                } else {
+                    minefieldButtons[i][j].setBackground(alternateTileColors[1]);
+                }
+                colorCount++;
             }
         }
         for (int i = 0; i < rows; i++) {

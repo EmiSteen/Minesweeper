@@ -16,7 +16,7 @@ class BoardGUI {
     private boolean devMode = false;
     private Color colors[] = {Color.black, Color.blue, Color.green, Color.red, Color.cyan, Color.orange, Color.pink, Color.MAGENTA, Color.BLACK};
     private Color uncoveredColor = new Color(0, 190, 255);
-    private Color alternateTileColors[] = {new Color(255, 255, 255),new Color(255, 255, 255)};
+    private Color alternateTileColors[] = {new Color(255, 255, 255), new Color(255, 255, 255)};
 
     BoardGUI(int rows, int cols, int mines) {
         this.rows = rows;
@@ -40,7 +40,7 @@ class BoardGUI {
         JButton minefieldButtons[][] = new JButton[rows][cols];
         int colorCount;
         for (int i = 0; i < rows; i++) {
-            if (i%2==0) {
+            if (i % 2 == 0) {
                 colorCount = 0;
             } else {
                 colorCount = 1;
@@ -50,7 +50,7 @@ class BoardGUI {
 
                 minefieldButtons[i][j].setFocusable(false);
                 minefieldPanel.add(minefieldButtons[i][j]);
-                if (colorCount%2==0){
+                if (colorCount % 2 == 0) {
                     minefieldButtons[i][j].setBackground(alternateTileColors[0]);
                 } else {
                     minefieldButtons[i][j].setBackground(alternateTileColors[1]);
@@ -187,6 +187,20 @@ class BoardGUI {
         });
         changeBoardButton.setFocusable(false);
         systemPanel.add(changeBoardButton);
+        JButton pauseButton = new JButton();
+        pauseButton.setText("Pause");
+        pauseButton.addActionListener(actionEvent -> {
+                    if (gameActive) {
+                        pauseButton.setText("Play");
+                        gameActive = false;
+                    } else {
+                        pauseButton.setText("Pause");
+                        gameActive = true;
+                    }
+                }
+        );
+        pauseButton.setFocusable(false);
+        systemPanel.add(pauseButton);
         JButton restartButton = new JButton();
         restartButton.setText("Restart");
         restartButton.addActionListener(actionEvent -> {
@@ -195,12 +209,6 @@ class BoardGUI {
         });
         restartButton.setFocusable(false);
         systemPanel.add(restartButton);
-        JButton quitButton = new JButton();
-        quitButton.setText("Quit");
-        quitButton.addActionListener(actionEvent ->
-                System.exit(0));
-        quitButton.setFocusable(false);
-        systemPanel.add(quitButton);
         return systemPanel;
     }
 
@@ -214,16 +222,18 @@ class BoardGUI {
 
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (count % 60 < 10 && count / 60 < 10) {
-                    timeLabel.setText("0" + count / 60 + ":0" + count % 60);
-                } else if (count % 60 >= 10 && count / 60 < 10) {
-                    timeLabel.setText("0" + count / 60 + ":" + count % 60);
-                } else if (count % 60 < 10 && count / 60 >= 10) {
-                    timeLabel.setText(count / 60 + ":0" + count % 60);
-                } else if (count % 60 >= 10 && count / 60 >= 10) {
-                    timeLabel.setText(count / 60 + ":" + count % 60);
+                if (gameActive) {
+                    if (count % 60 < 10 && count / 60 < 10) {
+                        timeLabel.setText("0" + count / 60 + ":0" + count % 60);
+                    } else if (count % 60 >= 10 && count / 60 < 10) {
+                        timeLabel.setText("0" + count / 60 + ":" + count % 60);
+                    } else if (count % 60 < 10 && count / 60 >= 10) {
+                        timeLabel.setText(count / 60 + ":0" + count % 60);
+                    } else if (count % 60 >= 10 && count / 60 >= 10) {
+                        timeLabel.setText(count / 60 + ":" + count % 60);
+                    }
+                    count++;
                 }
-                count++;
             }
         });
         return timePanel;

@@ -90,6 +90,7 @@ class BoardGUI {
                                 gameOver(1);
                             }
                         } else if (gameActive && mouseEvent.getButton() == 3) {
+                            // todo: make second right click on a covered block a question flag
                             if (!mf.isUncovered(row, col)) {
                                 if (mf.isFlagged(row, col)) {
                                     mf.unflag(row, col);
@@ -190,6 +191,7 @@ class BoardGUI {
         JButton pauseButton = new JButton();
         pauseButton.setText("Pause");
         pauseButton.addActionListener(actionEvent -> {
+            // todo: set pause button inactive before game starts
                     if (gameActive) {
                         pauseButton.setText("Play");
                         gameActive = false;

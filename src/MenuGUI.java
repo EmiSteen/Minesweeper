@@ -5,7 +5,7 @@ class MenuGUI {
 
     MenuGUI() {
         JFrame frame = new JFrame("Minesweeper");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setSize(250, 400);
         frame.setResizable(false);
@@ -80,7 +80,6 @@ class MenuGUI {
             int rows = (int) rowSP.getValue();
             int cols = (int) colSP.getValue();
             int mines = (int) (((int) mineSP.getValue()) / 100.0 * (rows * cols));
-            System.out.println(mines);
             new BoardGUI(rows, cols, mines);
         });
         startButton.setFocusable(false);

@@ -15,8 +15,8 @@ class BoardGUI {
     private JLabel flagLabel;
     private boolean devMode = false;
     private Color colors[] = {Color.black, Color.blue, Color.green, Color.red, Color.cyan, Color.orange, Color.pink, Color.MAGENTA, Color.BLACK};
-    private Color uncoveredColor = new Color(200, 200, 255);
-    private Color alternateTileColors[] = {new Color(255, 255, 255),new Color(0, 190, 255)};
+    private Color uncoveredColor = new Color(0, 190, 255);
+    private Color alternateTileColors[] = {new Color(255, 255, 255),new Color(255, 255, 255)};
 
     BoardGUI(int rows, int cols, int mines) {
         this.rows = rows;

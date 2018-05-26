@@ -23,7 +23,7 @@ class BoardGUI {
         this.cols = cols;
         this.mines = mines;
         Minefield mf = new Minefield(rows, cols, mines);
-        JFrame frame = new JFrame("Minesweeper");
+        JFrame frame = new JFrame(cols+"x"+rows+" - "+mines+"*");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setSize(cols * 47, rows * 47 + 100);

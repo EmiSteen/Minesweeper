@@ -116,6 +116,7 @@ class BoardGUI {
                                         minefieldButtons[i][j].setText("*");
                                     }
                                 } else if (mf.isFlagged(i, j)) {
+                                    minefieldButtons[i][j].setBackground(Color.RED);
                                     minefieldButtons[i][j].setText("x");
                                 }
                             }

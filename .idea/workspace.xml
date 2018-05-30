@@ -2,7 +2,7 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/BoardGUI.java" line="0" />
-    <bookmark url="file://$PROJECT_DIR$/src/BoardGUI.java" line="138" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/src/BoardGUI.java" line="141" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="040fd83c-d33e-4c80-b01f-3880d3940a6c" name="Default" comment="">
@@ -32,9 +32,13 @@
       <file leaf-file-name="MenuGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MenuGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="20" column="53" lean-forward="true" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
-              <folding />
+            <state relative-caret-position="90">
+              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding>
+                <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
+                <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
+                <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -42,11 +46,12 @@
       <file leaf-file-name="BoardGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/BoardGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="218" column="43" lean-forward="false" selection-start-line="218" selection-start-column="43" selection-end-line="218" selection-end-column="43" />
+            <state relative-caret-position="2310">
+              <caret line="173" column="27" lean-forward="false" selection-start-line="173" selection-start-column="27" selection-end-line="173" selection-end-column="27" />
               <folding>
                 <element signature="method#BoardGUI#0;class#BoardGUI#0" expanded="false" />
-                <element signature="method#minefieldPanel#0;class#BoardGUI#0" expanded="false" />
+                <element signature="method#systemPanel#0;class#BoardGUI#0" expanded="false" />
+                <element signature="e#9300#9795#0" expanded="false" />
                 <element signature="method#timePanel#0;class#BoardGUI#0" expanded="false" />
                 <element signature="method#repaintBoard#0;class#BoardGUI#0" expanded="false" />
                 <element signature="method#setBlankBoard#0;class#BoardGUI#0" expanded="false" />
@@ -87,9 +92,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="777" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -148,6 +152,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -597,7 +602,7 @@
       <workItem from="1527201828715" duration="5000" />
       <workItem from="1527202738660" duration="972000" />
       <workItem from="1527207174989" duration="3357000" />
-      <workItem from="1527366180333" duration="4171000" />
+      <workItem from="1527366180333" duration="5462000" />
     </task>
     <task id="LOCAL-00001" summary="Changed Board Sizes and cleaned up code">
       <created>1527181689456</created>
@@ -652,7 +657,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24215000" />
+    <option name="totallyTimeSpent" value="25506000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -664,11 +669,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="777" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924336" sideWeight="0.4948787" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -676,10 +681,10 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924336" sideWeight="0.5051213" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34887007" sideWeight="0.49380055" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32802126" sideWeight="0.49380055" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32802126" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32768363" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24921875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -782,21 +787,14 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BoardGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2310">
           <caret line="159" column="22" lean-forward="true" selection-start-line="159" selection-start-column="22" selection-end-line="159" selection-end-column="22" />
           <folding>
             <element signature="method#BoardGUI#0;class#BoardGUI#0" expanded="false" />
-            <element signature="method#minefieldPanel#0;class#BoardGUI#0" expanded="false" />
+            <element signature="method#systemPanel#0;class#BoardGUI#0" expanded="false" />
+            <element signature="e#9300#9795#0" expanded="false" />
             <element signature="method#timePanel#0;class#BoardGUI#0" expanded="false" />
             <element signature="method#repaintBoard#0;class#BoardGUI#0" expanded="false" />
             <element signature="method#setBlankBoard#0;class#BoardGUI#0" expanded="false" />
@@ -847,7 +845,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-          <folding />
+          <folding>
+            <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -877,7 +879,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="19" column="50" lean-forward="false" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
-          <folding />
+          <folding>
+            <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -907,7 +913,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="17" column="48" lean-forward="false" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
-          <folding />
+          <folding>
+            <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -923,7 +933,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-          <folding />
+          <folding>
+            <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -990,7 +1004,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-          <folding />
+          <folding>
+            <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1013,7 +1031,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-          <folding />
+          <folding>
+            <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1043,7 +1065,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-          <folding />
+          <folding>
+            <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1073,7 +1099,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-          <folding />
+          <folding>
+            <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1132,11 +1162,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Red_flag.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/MenuGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="20" column="53" lean-forward="true" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
-          <folding />
+        <state relative-caret-position="90">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding>
+            <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
+            <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1150,11 +1189,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BoardGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="218" column="43" lean-forward="false" selection-start-line="218" selection-start-column="43" selection-end-line="218" selection-end-column="43" />
+        <state relative-caret-position="2310">
+          <caret line="173" column="27" lean-forward="false" selection-start-line="173" selection-start-column="27" selection-end-line="173" selection-end-column="27" />
           <folding>
             <element signature="method#BoardGUI#0;class#BoardGUI#0" expanded="false" />
-            <element signature="method#minefieldPanel#0;class#BoardGUI#0" expanded="false" />
+            <element signature="method#systemPanel#0;class#BoardGUI#0" expanded="false" />
+            <element signature="e#9300#9795#0" expanded="false" />
             <element signature="method#timePanel#0;class#BoardGUI#0" expanded="false" />
             <element signature="method#repaintBoard#0;class#BoardGUI#0" expanded="false" />
             <element signature="method#setBlankBoard#0;class#BoardGUI#0" expanded="false" />

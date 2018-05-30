@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+// todo: replace flags and mines with images
+// todo: adjust frame size to screen
+
 class BoardGUI {
 
     private boolean gameActive = false;

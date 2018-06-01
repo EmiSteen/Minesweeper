@@ -22,7 +22,8 @@ class BoardGUI {
     private boolean devMode = false;
     private Color digitColors[] = {Color.black, Color.blue, Color.green, Color.red, Color.cyan, Color.orange, Color.pink, Color.MAGENTA, Color.BLACK};
     private Color uncoveredTileColor = new Color(0, 190, 255);
-    private Color alternateTileColors[] = {new Color(255, 255, 255), new Color(255, 255, 255)};
+    //private Color alternateTileColors[] = {new Color(255, 255, 255), new Color(255, 255, 255)};
+    private Color alternateTileColors[] = {new Color(180,180,180), new Color(255, 255, 255)};
     private Color pausedTileColor = new Color(113,113,114);
     private Color flaggedTileColor = Color.yellow;
 
@@ -48,20 +49,12 @@ class BoardGUI {
         minefieldButtons = new JButton[rows][cols];
         int colorCount;
         for (int i = 0; i < rows; i++) {
-            if (i % 2 == 0) {
-                colorCount = 0;
-            } else {
-                colorCount = 1;
-            }
+            colorCount = i % 2;
             for (int j = 0; j < cols; j++) {
                 minefieldButtons[i][j] = new JButton();
                 minefieldButtons[i][j].setFocusable(false);
                 minefieldPanel.add(minefieldButtons[i][j]);
-                if (colorCount % 2 == 0) {
-                    minefieldButtons[i][j].setBackground(alternateTileColors[0]);
-                } else {
-                    minefieldButtons[i][j].setBackground(alternateTileColors[1]);
-                }
+                minefieldButtons[i][j].setBackground(alternateTileColors[colorCount%2]);
                 colorCount++;
             }
         }
@@ -141,8 +134,8 @@ class BoardGUI {
                     }
 
                     private void gameOver(int status) {
-                        showBombs();
                         timer.stop();
+                        showBombs();
                         if (status == 0) {
                             JOptionPane.showMessageDialog(minefieldPanel, "Game Over!");
                         } else if (status == 1) {
@@ -172,11 +165,11 @@ class BoardGUI {
 
                     private void mouseButton3Action() {
                         // todo: make second right click on a covered block a question flag
-                        // todo: reset color to correct alternate tile color
                         if (!mf.isUncovered(row, col)) {
                             if (mf.isFlagged(row, col)) {
                                 mf.unflag(row, col);
-                                minefieldButtons[row][col].setBackground(alternateTileColors[0]);
+                                int tileColorNum = (row+col)%2;
+                                minefieldButtons[row][col].setBackground(alternateTileColors[tileColorNum]);
                                 minefieldButtons[row][col].setText("");
                                 flagLabel.setText(mf.getFlagCounter() + "/" + mines);
                             } else {
@@ -269,11 +262,7 @@ class BoardGUI {
     private void repaintBoard()   {
         int colorCount;
         for (int i = 0; i < rows; i++) {
-            if (i % 2 == 0) {
-                colorCount = 0;
-            } else {
-                colorCount = 1;
-            }
+            colorCount = i % 2;
             for (int j = 0; j < cols; j++) {
                 if (mf.isUncovered(i, j)) {
                     minefieldButtons[i][j].setBackground(uncoveredTileColor);
@@ -282,16 +271,13 @@ class BoardGUI {
                         minefieldButtons[i][j].setForeground(digitColors[mf.getValue(i, j)]);
                     }
                 } else {
-                    if (colorCount % 2 == 0) {
-                        minefieldButtons[i][j].setBackground(alternateTileColors[0]);
-                    } else {
-                        minefieldButtons[i][j].setBackground(alternateTileColors[1]);
-                    }
+                    minefieldButtons[i][j].setBackground(alternateTileColors[colorCount % 2]);
                     if (mf.isFlagged(i,j)) {
                         minefieldButtons[i][j].setBackground(flaggedTileColor);
                         minefieldButtons[i][j].setText("^");
                     }
                 }
+                colorCount++;
             }
         }
     }

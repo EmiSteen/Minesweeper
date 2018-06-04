@@ -2,10 +2,13 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/BoardGUI.java" line="0" />
-    <bookmark url="file://$PROJECT_DIR$/src/BoardGUI.java" line="135" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/src/BoardGUI.java" line="134" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="040fd83c-d33e-4c80-b01f-3880d3940a6c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Minesweeper/BoardGUI$1.class" afterPath="$PROJECT_DIR$/out/production/Minesweeper/BoardGUI$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Minesweeper/BoardGUI$2.class" afterPath="$PROJECT_DIR$/out/production/Minesweeper/BoardGUI$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Minesweeper/BoardGUI.class" afterPath="$PROJECT_DIR$/out/production/Minesweeper/BoardGUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BoardGUI.java" afterPath="$PROJECT_DIR$/src/BoardGUI.java" />
     </list>
@@ -34,16 +37,31 @@
         <entry file="file://$PROJECT_DIR$/src/Minefield.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+              <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
               <folding>
+                <element signature="imports" expanded="false" />
                 <element signature="method#Minefield#0;class#Minefield#0" expanded="false" />
                 <element signature="method#generateMinefield#0;class#Minefield#0" expanded="false" />
+                <element signature="e#1629#1630#0" expanded="false" />
+                <element signature="e#1671#1672#0" expanded="false" />
                 <element signature="method#checkAdjecency#0;class#Minefield#0" expanded="false" />
                 <element signature="method#flag#0;class#Minefield#0" expanded="false" />
+                <element signature="e#2308#2309#0" expanded="false" />
+                <element signature="e#2351#2352#0" expanded="false" />
                 <element signature="method#unflag#0;class#Minefield#0" expanded="false" />
                 <element signature="method#uncover#0;class#Minefield#0" expanded="false" />
+                <element signature="e#2687#2688#0" expanded="false" />
+                <element signature="e#2730#2731#0" expanded="false" />
                 <element signature="method#checkAdjecentFlags#0;class#Minefield#0" expanded="false" />
                 <element signature="e#3139#3174#0" expanded="false" />
+                <element signature="e#4256#4257#0" expanded="false" />
+                <element signature="e#4302#4303#0" expanded="false" />
+                <element signature="e#4330#4331#0" expanded="false" />
+                <element signature="e#4369#4370#0" expanded="false" />
+                <element signature="e#4410#4411#0" expanded="false" />
+                <element signature="e#4440#4441#0" expanded="false" />
+                <element signature="e#4469#4470#0" expanded="false" />
+                <element signature="e#4509#4510#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -55,6 +73,7 @@
             <state relative-caret-position="90">
               <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding>
+                <element signature="imports" expanded="false" />
                 <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
                 <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
                 <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
@@ -66,14 +85,16 @@
       <file leaf-file-name="BoardGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/BoardGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="166" column="91" lean-forward="false" selection-start-line="166" selection-start-column="91" selection-end-line="166" selection-end-column="91" />
+            <state relative-caret-position="285">
+              <caret line="24" column="19" lean-forward="false" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
               <folding>
                 <element signature="method#BoardGUI#0;class#BoardGUI#0" expanded="false" />
+                <element signature="method#minefieldPanel#0;class#BoardGUI#0" expanded="false" />
                 <element signature="method#systemPanel#0;class#BoardGUI#0" expanded="false" />
-                <element signature="e#9221#9716#0" expanded="false" />
+                <element signature="e#9123#9618#0" expanded="false" />
                 <element signature="method#timePanel#0;class#BoardGUI#0" expanded="false" />
-                <element signature="method#actionPerformed#0;class#10378:11223" expanded="false" />
+                <element signature="method#actionPerformed#0;class#10280:11125" expanded="false" />
+                <element signature="method#repaintBoard#0;class#BoardGUI#0" expanded="false" />
                 <element signature="method#setBlankBoard#0;class#BoardGUI#0" expanded="false" />
               </folding>
             </state>
@@ -131,7 +152,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -160,8 +183,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -623,7 +644,9 @@
       <workItem from="1527202738660" duration="972000" />
       <workItem from="1527207174989" duration="3357000" />
       <workItem from="1527366180333" duration="7184000" />
-      <workItem from="1527804517071" duration="2693000" />
+      <workItem from="1527804517071" duration="4068000" />
+      <workItem from="1528107479081" duration="108000" />
+      <workItem from="1528108940598" duration="197000" />
     </task>
     <task id="LOCAL-00001" summary="Changed Board Sizes and cleaned up code">
       <created>1527181689456</created>
@@ -678,7 +701,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29921000" />
+    <option name="totallyTimeSpent" value="31601000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -696,13 +719,12 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32909605" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924336" sideWeight="0.4948787" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32669324" sideWeight="0.5054687" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32802126" sideWeight="0.49380055" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32802126" sideWeight="0.49380055" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32669324" sideWeight="0.49453124" order="9" side_tool="false" content_ui="tabs" />
@@ -720,6 +742,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924336" sideWeight="0.4948787" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -799,7 +822,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -814,10 +837,12 @@
           <caret line="159" column="22" lean-forward="true" selection-start-line="159" selection-start-column="22" selection-end-line="159" selection-end-column="22" />
           <folding>
             <element signature="method#BoardGUI#0;class#BoardGUI#0" expanded="false" />
+            <element signature="method#minefieldPanel#0;class#BoardGUI#0" expanded="false" />
             <element signature="method#systemPanel#0;class#BoardGUI#0" expanded="false" />
-            <element signature="e#9221#9716#0" expanded="false" />
+            <element signature="e#9123#9618#0" expanded="false" />
             <element signature="method#timePanel#0;class#BoardGUI#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10378:11223" expanded="false" />
+            <element signature="method#actionPerformed#0;class#10280:11125" expanded="false" />
+            <element signature="method#repaintBoard#0;class#BoardGUI#0" expanded="false" />
             <element signature="method#setBlankBoard#0;class#BoardGUI#0" expanded="false" />
           </folding>
         </state>
@@ -867,6 +892,7 @@
         <state relative-caret-position="30">
           <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
@@ -901,6 +927,7 @@
         <state relative-caret-position="240">
           <caret line="19" column="50" lean-forward="false" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
@@ -935,6 +962,7 @@
         <state relative-caret-position="108">
           <caret line="17" column="48" lean-forward="false" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
@@ -955,6 +983,7 @@
         <state relative-caret-position="30">
           <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
@@ -1026,6 +1055,7 @@
         <state relative-caret-position="72">
           <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
@@ -1053,6 +1083,7 @@
         <state relative-caret-position="72">
           <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
@@ -1087,6 +1118,7 @@
         <state relative-caret-position="72">
           <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
@@ -1121,6 +1153,7 @@
         <state relative-caret-position="72">
           <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
@@ -1187,11 +1220,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Minefield.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="method#Minefield#0;class#Minefield#0" expanded="false" />
+            <element signature="method#generateMinefield#0;class#Minefield#0" expanded="false" />
+            <element signature="e#1629#1630#0" expanded="false" />
+            <element signature="e#1671#1672#0" expanded="false" />
+            <element signature="method#checkAdjecency#0;class#Minefield#0" expanded="false" />
+            <element signature="method#flag#0;class#Minefield#0" expanded="false" />
+            <element signature="e#2308#2309#0" expanded="false" />
+            <element signature="e#2351#2352#0" expanded="false" />
+            <element signature="method#unflag#0;class#Minefield#0" expanded="false" />
+            <element signature="method#uncover#0;class#Minefield#0" expanded="false" />
+            <element signature="e#2687#2688#0" expanded="false" />
+            <element signature="e#2730#2731#0" expanded="false" />
+            <element signature="method#checkAdjecentFlags#0;class#Minefield#0" expanded="false" />
+            <element signature="e#3139#3174#0" expanded="false" />
+            <element signature="e#4256#4257#0" expanded="false" />
+            <element signature="e#4302#4303#0" expanded="false" />
+            <element signature="e#4330#4331#0" expanded="false" />
+            <element signature="e#4369#4370#0" expanded="false" />
+            <element signature="e#4410#4411#0" expanded="false" />
+            <element signature="e#4440#4441#0" expanded="false" />
+            <element signature="e#4469#4470#0" expanded="false" />
+            <element signature="e#4509#4510#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/MenuGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#MenuGUI#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#selectionPanel#0;class#MenuGUI#0" expanded="false" />
             <element signature="method#customPanel#0;class#MenuGUI#0" expanded="false" />
@@ -1199,33 +1265,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Minefield.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
-          <folding>
-            <element signature="method#Minefield#0;class#Minefield#0" expanded="false" />
-            <element signature="method#generateMinefield#0;class#Minefield#0" expanded="false" />
-            <element signature="method#checkAdjecency#0;class#Minefield#0" expanded="false" />
-            <element signature="method#flag#0;class#Minefield#0" expanded="false" />
-            <element signature="method#unflag#0;class#Minefield#0" expanded="false" />
-            <element signature="method#uncover#0;class#Minefield#0" expanded="false" />
-            <element signature="method#checkAdjecentFlags#0;class#Minefield#0" expanded="false" />
-            <element signature="e#3139#3174#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BoardGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="166" column="91" lean-forward="false" selection-start-line="166" selection-start-column="91" selection-end-line="166" selection-end-column="91" />
+        <state relative-caret-position="285">
+          <caret line="24" column="19" lean-forward="false" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
           <folding>
             <element signature="method#BoardGUI#0;class#BoardGUI#0" expanded="false" />
+            <element signature="method#minefieldPanel#0;class#BoardGUI#0" expanded="false" />
             <element signature="method#systemPanel#0;class#BoardGUI#0" expanded="false" />
-            <element signature="e#9221#9716#0" expanded="false" />
+            <element signature="e#9123#9618#0" expanded="false" />
             <element signature="method#timePanel#0;class#BoardGUI#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10378:11223" expanded="false" />
+            <element signature="method#actionPerformed#0;class#10280:11125" expanded="false" />
+            <element signature="method#repaintBoard#0;class#BoardGUI#0" expanded="false" />
             <element signature="method#setBlankBoard#0;class#BoardGUI#0" expanded="false" />
           </folding>
         </state>

@@ -22,7 +22,9 @@ class BoardGUI {
     private boolean devMode = false;
     private Color digitColors[] = {Color.black, Color.blue, Color.green, Color.red, Color.cyan, Color.orange, Color.pink, Color.MAGENTA, Color.BLACK};
     private Color uncoveredTileColor = new Color(0, 190, 255);
-    private Color alternateTileColors[] = {new Color(180,180,180), new Color(255, 255, 255)};
+    // unused tile colors
+    //private Color alternateTileColors[] = {new Color(180,180,180), new Color(255, 255, 255)};
+    private Color alternateTileColors[] = {new Color(255, 255, 255), new Color(255, 255, 255)};
     private Color pausedTileColor = new Color(113,113,114);
     private Color flaggedTileColor = Color.yellow;
 

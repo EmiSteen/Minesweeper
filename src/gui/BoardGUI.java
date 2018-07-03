@@ -1,12 +1,15 @@
+package gui;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import game.Minefield;
 
 // todo: replace flags and mines with images
-// todo: adjust frame size to screen
+// todo: Start a new game on same window when game is over
 
 class BoardGUI {
 
@@ -20,9 +23,9 @@ class BoardGUI {
     private Timer timer;
     private JLabel flagLabel;
     private boolean devMode = false;
-    private Color digitColors[] = {Color.black, Color.blue, Color.green, Color.red, Color.cyan, Color.orange, Color.pink, Color.MAGENTA, Color.BLACK};
+    private Color digitColors[] = {Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.CYAN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.BLACK};
     private Color uncoveredTileColor = new Color(0, 190, 255);
-    // unused tile colors
+    //unused tile colors
     //private Color alternateTileColors[] = {new Color(180,180,180), new Color(255, 255, 255)};
     private Color alternateTileColors[] = {new Color(255, 255, 255), new Color(255, 255, 255)};
     private Color pausedTileColor = new Color(113,113,114);

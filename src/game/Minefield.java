@@ -1,7 +1,9 @@
+package game;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class Minefield {
+public class Minefield {
     private int minefield[][];
     private int state[][];
     private int correctFlagCounter = 0;
@@ -11,7 +13,7 @@ class Minefield {
     private int cols;
     private int numMines;
 
-    Minefield(int rows, int cols, int mines) {
+    public Minefield(int rows, int cols, int mines) {
         this.rows = rows;
         this.cols = cols;
         this.numMines = mines;
@@ -19,7 +21,7 @@ class Minefield {
         state = new int[rows][cols];
     }
 
-    void generateMinefield(int row, int col) {
+    public void generateMinefield(int row, int col) {
         minefield = new int[this.rows][this.cols];
         int elements = 0;
         for (int i = 0; i < rows; i++) {
@@ -49,7 +51,7 @@ class Minefield {
         }
     }
 
-    int getValue(int row, int col) {
+    public int getValue(int row, int col) {
         return minefield[row][col];
     }
 
@@ -65,7 +67,7 @@ class Minefield {
         minefield[row][col] = adjecent;
     }
 
-    void flag(int row, int col) {
+    public void flag(int row, int col) {
         state[row][col] = 2;
         if (minefield[row][col] == -1) {
             correctFlagCounter++;
@@ -73,11 +75,11 @@ class Minefield {
         flagCounter++;
     }
 
-    boolean isFlagged(int row, int col) {
+    public boolean isFlagged(int row, int col) {
         return state[row][col] == 2;
     }
 
-    void unflag(int row, int col) {
+    public void unflag(int row, int col) {
         state[row][col] = 0;
         if (minefield[row][col] == -1) {
             correctFlagCounter--;
@@ -90,11 +92,11 @@ class Minefield {
         incrementUncovered();
     }
 
-    boolean isUncovered(int row, int col) {
+    public boolean isUncovered(int row, int col) {
         return state[row][col] == 1;
     }
 
-    int checkAdjecentFlags(int row, int col) {
+    public int checkAdjecentFlags(int row, int col) {
         int adjecentFlags = 0;
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
@@ -141,11 +143,11 @@ class Minefield {
 //        printGrid(minefield);
 //    }
 
-    int getCorrectFlagCounter() {
+    public int getCorrectFlagCounter() {
         return this.correctFlagCounter;
     }
 
-    int getFlagCounter() {
+    public int getFlagCounter() {
         return this.flagCounter;
     }
 
@@ -153,11 +155,11 @@ class Minefield {
         numUncovered++;
     }
 
-    int getNumUncovered() {
+    public int getNumUncovered() {
         return this.numUncovered;
     }
 
-    int digMine(int row, int col) {
+    public int digMine(int row, int col) {
         if (!isUncovered(row,col) && getValue(row,col) == -1 && !isFlagged(row, col)) {
             return -1;
         } else if (!isUncovered(row, col) && !isFlagged(row, col)) {

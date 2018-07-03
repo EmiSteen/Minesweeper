@@ -1,4 +1,7 @@
+package game;
+
 import javax.swing.*;
+import gui.MenuGUI;
 
 public class Main {
 

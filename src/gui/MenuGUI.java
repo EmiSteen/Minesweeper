@@ -1,9 +1,11 @@
+package gui;
+
 import javax.swing.*;
 import java.awt.*;
 
-class MenuGUI {
+public class MenuGUI {
 
-    MenuGUI() {
+    public MenuGUI() {
         JFrame frame = new JFrame("Minesweeper");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());

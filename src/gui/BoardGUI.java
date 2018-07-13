@@ -109,7 +109,7 @@ class BoardGUI {
                     if (value == -1) {
                         gameOver(0);
                     }
-                } else if (mf.isUncovered(row, col) && mf.getValue(row, col) != 0 && mf.checkAdjecentFlags(row, col) == mf.getValue(row, col)) {
+                } else if (mf.isUncovered(row, col) && mf.getAdjacent(row, col) != 0 && mf.countAdjacentFlags(row, col) == mf.getAdjacent(row, col)) {
                     boolean foundMine = digAdjecent();
                     if (foundMine) {
                         repaintBoard();
@@ -117,7 +117,7 @@ class BoardGUI {
                     }
                 }
                 repaintBoard();
-                if (mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines && mf.getNumUncovered() == rows * cols - mines) {
+                if (isWinningMove()) {
                     gameOver(1);
                 }
             }
@@ -126,7 +126,7 @@ class BoardGUI {
                 boolean foundMine = false;
                 for (int k = -1; k <= 1; k++) {
                     for (int l = -1; l <= 1; l++) {
-                        if (mf.checkIfInsideBounds(row, col, k, l)) {
+                        if (mf.isInsideBounds(row, col, k, l)) {
                             if (mf.digMine(row + k, col + l) == -1) {
                                 foundMine = true;
                             }
@@ -154,10 +154,14 @@ class BoardGUI {
                         minefieldButtons[row][col].setText("^");
                         flagLabel.setText(mf.getFlagCounter() + "/" + mines);
                     }
-                    if (mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines && mf.getNumUncovered() == rows * cols - mines) {
+                    if (isWinningMove()) {
                         gameOver(1);
                     }
                 }
+            }
+
+            private boolean isWinningMove() {
+                return mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines && mf.getNumUncovered() == rows * cols - mines;
             }
 
             private void startGame() {
@@ -186,7 +190,7 @@ class BoardGUI {
             private void showBombs() {
                 for (int i = 0; i < rows; i++) {
                     for (int j = 0; j < cols; j++) {
-                        if (mf.getValue(i, j) == -1) {
+                        if (mf.getAdjacent(i, j) == -1) {
                             if (!mf.isFlagged(i, j)) {
                                 minefieldButtons[i][j].setText("*");
                             }
@@ -262,7 +266,7 @@ class BoardGUI {
         return timePanel;
     }
 
-    private int updateTimeLabel(JLabel timeLabel ,int count) {
+    private void updateTimeLabel(JLabel timeLabel ,int count) {
         if (count % 60 < 10 && count / 60 < 10) {
             timeLabel.setText("0" + count / 60 + ":0" + count % 60);
         } else if (count % 60 >= 10 && count / 60 < 10) {
@@ -272,19 +276,18 @@ class BoardGUI {
         } else if (count % 60 >= 10 && count / 60 >= 10) {
             timeLabel.setText(count / 60 + ":" + count % 60);
         }
-        return count;
     }
 
-    private void repaintBoard()   {
+    private void repaintBoard() {
         int colorCount;
         for (int i = 0; i < rows; i++) {
             colorCount = i % 2;
             for (int j = 0; j < cols; j++) {
                 if (mf.isUncovered(i, j)) {
                     minefieldButtons[i][j].setBackground(uncoveredTileColor);
-                    if (mf.getValue(i, j) > 0) {
-                        minefieldButtons[i][j].setText(mf.getValue(i, j) + "");
-                        minefieldButtons[i][j].setForeground(digitColors[mf.getValue(i, j)]);
+                    if (mf.getAdjacent(i, j) > 0) {
+                        minefieldButtons[i][j].setText(mf.getAdjacent(i, j) + "");
+                        minefieldButtons[i][j].setForeground(digitColors[mf.getAdjacent(i, j)]);
                     }
                 } else {
                     minefieldButtons[i][j].setBackground(alternateTileColors[colorCount % 2]);

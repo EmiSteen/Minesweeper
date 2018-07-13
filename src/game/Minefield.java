@@ -33,7 +33,7 @@ public class Minefield {
         int availableMineBlockCount = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if ((i > row + 1 || i < row - 1) || (j > col + 1 || j < col - 1)) {
+                if (isOutsidePerimeter(row, col, i, j)) {
                     availableMineBlockCount++;
                 }
             }
@@ -45,7 +45,7 @@ public class Minefield {
         int count = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if ((i > row + 1 || i < row - 1) || (j > col + 1 || j < col - 1)) {
+                if (isOutsidePerimeter(row, col, i, j)) {
                     availableMineBlockPosition.add(count);
                 }
                 count++;
@@ -64,11 +64,15 @@ public class Minefield {
         }
     }
 
-    public int getValue(int row, int col) {
+    private boolean isOutsidePerimeter(int row, int col, int i, int j) {
+        return (i > row + 1 || i < row - 1) || (j > col + 1 || j < col - 1);
+    }
+
+    public int getAdjacent(int row, int col) {
         return minefield[row][col];
     }
 
-    private void checkAdjecency(int row, int col) {
+    private void calculateAdjacent(int row, int col) {
         int adjecent = 0;
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
@@ -81,7 +85,7 @@ public class Minefield {
     }
 
     private boolean checkForMine(int row, int col, int i, int j) {
-        return row + i >= 0 && row + i < this.rows && col + j >= 0 && col + j < this.cols && minefield[row + i][col + j] == -1;
+        return isInsideBounds(row, col, i, j) && isMine(row+i, col+j);
     }
 
     public void flag(int row, int col) {
@@ -104,20 +108,11 @@ public class Minefield {
         flagCounter--;
     }
 
-    private void uncover(int row, int col) {
-        state[row][col] = 1;
-        incrementUncovered();
-    }
-
-    public boolean isUncovered(int row, int col) {
-        return state[row][col] == 1;
-    }
-
-    public int checkAdjecentFlags(int row, int col) {
+    public int countAdjacentFlags(int row, int col) {
         int adjecentFlags = 0;
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
-                if (checkIfInsideBounds(row, col, i, j) && state[row + i][col + j] == 2) {
+                if (isInsideBounds(row, col, i, j) && isFlagged(row+i, col+j)) {
                     adjecentFlags++;
                 }
             }
@@ -142,10 +137,10 @@ public class Minefield {
     }
 
     public int digMine(int row, int col) {
-        if (!isUncovered(row,col) && getValue(row,col) == -1 && !isFlagged(row, col)) {
+        if (!isUncovered(row,col) && isMine(row, col) && !isFlagged(row, col)) {
             return -1;
         } else if (!isUncovered(row, col) && !isFlagged(row, col)) {
-            checkAdjecency(row, col);
+            calculateAdjacent(row, col);
             uncover(row, col);
             if (minefield[row][col] == 0) {
                 eliminate(row, col);
@@ -161,15 +156,28 @@ public class Minefield {
     private void eliminate(int row, int col) {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
-                if (checkIfInsideBounds(row, col, i, j) && !isUncovered(row + i, col + j)) {
+                if (isInsideBounds(row, col, i, j) && !isUncovered(row + i, col + j)) {
                     digMine(row + i, col + j);
                 }
             }
         }
     }
 
-    public boolean checkIfInsideBounds(int row, int col, int i, int j) {
+    private void uncover(int row, int col) {
+        state[row][col] = 1;
+        incrementUncovered();
+    }
+
+    public boolean isUncovered(int row, int col) {
+        return state[row][col] == 1;
+    }
+
+    public boolean isInsideBounds(int row, int col, int i, int j) {
         return row + i >= 0 && row + i < this.rows && col + j >= 0 && col + j < this.cols;
+    }
+
+    private boolean isMine(int row, int col) {
+        return minefield[row][col] == -1;
     }
 
 //    Unused method to print a grid

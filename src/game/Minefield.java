@@ -23,31 +23,44 @@ public class Minefield {
 
     public void generateMinefield(int row, int col) {
         minefield = new int[this.rows][this.cols];
-        int elements = 0;
+        int availableMineBlockCount = getAvailableMineBlockCount(row, col);
+        List<Integer> availableMineBlockPosition = new ArrayList<>(availableMineBlockCount);
+        createAvailablePositionArrayList(row, col, availableMineBlockPosition);
+        spawnMines(availableMineBlockCount, availableMineBlockPosition);
+    }
+
+    private int getAvailableMineBlockCount(int row, int col) {
+        int availableMineBlockCount = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if ((i > row + 1 || i < row - 1) || (j > col + 1 || j < col - 1)) {
-                    elements++;
+                    availableMineBlockCount++;
                 }
             }
         }
-        List<Integer> availablePosition = new ArrayList<>(elements);
+        return availableMineBlockCount;
+    }
+
+    private void createAvailablePositionArrayList(int row, int col, List<Integer> availableMineBlockPosition) {
         int count = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if ((i > row + 1 || i < row - 1) || (j > col + 1 || j < col - 1)) {
-                    availablePosition.add(count);
+                    availableMineBlockPosition.add(count);
                 }
                 count++;
             }
         }
+    }
+
+    private void spawnMines(int availableMineBlockCount, List<Integer> availableMineBlockPosition) {
         for (int i = 0; i < numMines; i++) {
-            int random = (int) (Math.random() * elements);
-            int position = availablePosition.remove(random);
+            int random = (int) (Math.random() * availableMineBlockCount);
+            int position = availableMineBlockPosition.remove(random);
             int rRow = position / cols;
             int rCol = position % cols;
             minefield[rRow][rCol] = -1;
-            elements--;
+            availableMineBlockCount--;
         }
     }
 
@@ -57,14 +70,18 @@ public class Minefield {
 
     private void checkAdjecency(int row, int col) {
         int adjecent = 0;
-        for (int i = -1; i < 2; i++) {
-            for (int j = -1; j < 2; j++) {
-                if (row + i >= 0 && row + i < this.rows && col + j >= 0 && col + j < this.cols && minefield[row + i][col + j] == -1) {
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (checkForMine(row, col, i, j)) {
                     adjecent++;
                 }
             }
         }
         minefield[row][col] = adjecent;
+    }
+
+    private boolean checkForMine(int row, int col, int i, int j) {
+        return row + i >= 0 && row + i < this.rows && col + j >= 0 && col + j < this.cols && minefield[row + i][col + j] == -1;
     }
 
     public void flag(int row, int col) {
@@ -98,9 +115,9 @@ public class Minefield {
 
     public int checkAdjecentFlags(int row, int col) {
         int adjecentFlags = 0;
-        for (int i = -1; i < 2; i++) {
-            for (int j = -1; j < 2; j++) {
-                if (row + i >= 0 && row + i < this.rows && col + j >= 0 && col + j < this.cols && state[row + i][col + j] == 2) {
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (checkIfInsideBounds(row, col, i, j) && state[row + i][col + j] == 2) {
                     adjecentFlags++;
                 }
             }
@@ -108,7 +125,55 @@ public class Minefield {
         return adjecentFlags;
     }
 
+    public int getCorrectFlagCounter() {
+        return this.correctFlagCounter;
+    }
+
+    public int getFlagCounter() {
+        return this.flagCounter;
+    }
+
+    private void incrementUncovered() {
+        numUncovered++;
+    }
+
+    public int getNumUncovered() {
+        return this.numUncovered;
+    }
+
+    public int digMine(int row, int col) {
+        if (!isUncovered(row,col) && getValue(row,col) == -1 && !isFlagged(row, col)) {
+            return -1;
+        } else if (!isUncovered(row, col) && !isFlagged(row, col)) {
+            checkAdjecency(row, col);
+            uncover(row, col);
+            if (minefield[row][col] == 0) {
+                eliminate(row, col);
+            } else {
+                return minefield[row][col];
+            }
+        } else {
+            return -2;
+        }
+        return -3;
+    }
+
+    private void eliminate(int row, int col) {
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (checkIfInsideBounds(row, col, i, j) && !isUncovered(row + i, col + j)) {
+                    digMine(row + i, col + j);
+                }
+            }
+        }
+    }
+
+    public boolean checkIfInsideBounds(int row, int col, int i, int j) {
+        return row + i >= 0 && row + i < this.rows && col + j >= 0 && col + j < this.cols;
+    }
+
 //    Unused method to print a grid
+//
 //    private void printGrid(int grid[][]) {
 //        System.out.print("+");
 //        for (int i = 0; i < rows; i++) {
@@ -134,6 +199,7 @@ public class Minefield {
 //    }
 
 //    unused method to print the state of fields of the board
+//
 //    private void printState() {
 //        printGrid(state);
 //    }
@@ -142,48 +208,5 @@ public class Minefield {
 //    private void printMinefield() {
 //        printGrid(minefield);
 //    }
-
-    public int getCorrectFlagCounter() {
-        return this.correctFlagCounter;
-    }
-
-    public int getFlagCounter() {
-        return this.flagCounter;
-    }
-
-    private void incrementUncovered() {
-        numUncovered++;
-    }
-
-    public int getNumUncovered() {
-        return this.numUncovered;
-    }
-
-    public int digMine(int row, int col) {
-        if (!isUncovered(row,col) && getValue(row,col) == -1 && !isFlagged(row, col)) {
-            return -1;
-        } else if (!isUncovered(row, col) && !isFlagged(row, col)) {
-            checkAdjecency(row, col);
-            uncover(row, col);
-            if (getValue(row, col) == 0) {
-                eliminate(row, col);
-            } else {
-                return getValue(row, col);
-            }
-        } else {
-            return -2;
-        }
-        return 0;
-    }
-
-    private void eliminate(int row, int col) {
-        for (int i = -1; i < 2; i++) {
-            for (int j = -1; j < 2; j++) {
-                if (row + i >= 0 && row + i < rows && col + j >= 0 && col + j < cols && !isUncovered(row + i, col + j)) {
-                    digMine(row + i, col + j);
-                }
-            }
-        }
-    }
 
 }

@@ -73,15 +73,15 @@ public class Minefield {
     }
 
     private void calculateAdjacent(int row, int col) {
-        int adjecent = 0;
+        int adjacent = 0;
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 if (checkForMine(row, col, i, j)) {
-                    adjecent++;
+                    adjacent++;
                 }
             }
         }
-        minefield[row][col] = adjecent;
+        minefield[row][col] = adjacent;
     }
 
     private boolean checkForMine(int row, int col, int i, int j) {
@@ -181,7 +181,6 @@ public class Minefield {
     }
 
 //    Unused method to print a grid
-//
 //    private void printGrid(int grid[][]) {
 //        System.out.print("+");
 //        for (int i = 0; i < rows; i++) {
@@ -207,7 +206,6 @@ public class Minefield {
 //    }
 
 //    unused method to print the state of fields of the board
-//
 //    private void printState() {
 //        printGrid(state);
 //    }

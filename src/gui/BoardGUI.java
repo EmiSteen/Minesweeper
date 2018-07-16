@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 import game.Minefield;
 
@@ -23,15 +26,19 @@ class BoardGUI {
     private Timer timer;
     private JLabel flagLabel;
     private boolean devMode = false;
+    private boolean speedFlagMode = false;
     private Color digitColors[] = {Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.CYAN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.BLACK};
     private Color uncoveredTileColor = new Color(0, 190, 255);
-    //    unused tile colors
-//    private Color alternateTileColors[] = {new Color(180,180,180), new Color(255, 255, 255)};
+    // unused tile colors
+    // private Color alternateTileColors[] = {new Color(180,180,180), new Color(255, 255, 255)};
     private Color alternateTileColors[] = {new Color(255, 255, 255), new Color(255, 255, 255)};
     private Color pausedTileColor = new Color(113, 113, 114);
     private Color flaggedTileColor = Color.yellow;
+    private Color defaultButtonColor = new Color(125, 125, 125);
+    private Color selectedButtonColor = new Color(150, 100, 140);
 
     BoardGUI(int rows, int cols, int mines) {
+        readConfigFile();
         this.rows = rows;
         this.cols = cols;
         this.mines = mines;
@@ -45,6 +52,40 @@ class BoardGUI {
         frame.add(systemPanel(frame), BorderLayout.SOUTH);
         frame.add(timePanel(), BorderLayout.NORTH);
         frame.setVisible(true);
+    }
+
+    private void readConfigFile() {
+        File configFile = new File("resources/config_file.txt");
+        if (configFile.exists()) {
+            try {
+                Scanner scanner = new Scanner(configFile);
+                String modeConfig = scanner.next();
+                switch (modeConfig) {
+                    case "Normal":
+                        speedFlagMode = false;
+                        break;
+                    case "SpeedFlag":
+                        speedFlagMode = true;
+                        break;
+                    default:
+                        writeFile("Normal");
+                        break;
+                }
+                scanner.close();
+            } catch (Exception ignored) {
+            }
+        } else {
+            writeFile("Normal");
+        }
+    }
+
+    private void writeFile(String mode) {
+        try {
+            PrintWriter writer = new PrintWriter("resources/config_file.txt");
+            writer.println(mode);
+            writer.close();
+        } catch (Exception ignored) {
+        }
     }
 
     private JPanel minefieldPanel(JFrame frame) {
@@ -75,13 +116,17 @@ class BoardGUI {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 if (gameActive) {
-                    if (mouseEvent.getButton() == 1) {
-                        mouseButton1Action();
-                    } else if (mouseEvent.getButton() == 3) {
-                        mouseButton3Action();
+                    if (speedFlagMode) {
+                        speedFlagButtonAction(mouseEvent);
+                    } else {
+                        normalButtonAction(mouseEvent);
                     }
                 } else if (!gameStarted && mouseEvent.getButton() == 1) {
                     startGame();
+                }
+                repaintBoard();
+                if (isWinningMove()) {
+                    gameOver(1);
                 }
             }
 
@@ -103,8 +148,29 @@ class BoardGUI {
 
             }
 
-            private void mouseButton1Action() {
+            private void normalButtonAction(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton() == 1) {
+                    normalMouseButton1Action();
+                } else if (mouseEvent.getButton() == 3) {
+                    mouseButton3Action();
+                }
+            }
+
+            private void speedFlagButtonAction(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton() == 1) {
+                    speedMouseButton1Action();
+                } else if (mouseEvent.getButton() == 3) {
+                    altMouseButton1Action();
+                }
+            }
+
+            private void normalMouseButton1Action() {
                 altMouseButton1Action();
+                setMouseButton1Action();
+            }
+
+            private void speedMouseButton1Action() {
+                mouseButton3Action();
                 setMouseButton1Action();
             }
 
@@ -124,10 +190,6 @@ class BoardGUI {
                         repaintBoard();
                         gameOver(0);
                     }
-                }
-                repaintBoard();
-                if (isWinningMove()) {
-                    gameOver(1);
                 }
             }
 
@@ -153,18 +215,8 @@ class BoardGUI {
                 if (!mf.isUncovered(row, col)) {
                     if (mf.isFlagged(row, col)) {
                         mf.unflag(row, col);
-                        int tileColorNum = (row + col) % 2;
-                        minefieldButtons[row][col].setBackground(alternateTileColors[tileColorNum]);
-                        minefieldButtons[row][col].setText("");
-                        flagLabel.setText(mf.getFlagCounter() + "/" + mines);
                     } else {
                         mf.flag(row, col);
-                        minefieldButtons[row][col].setBackground(flaggedTileColor);
-                        minefieldButtons[row][col].setText("^");
-                        flagLabel.setText(mf.getFlagCounter() + "/" + mines);
-                    }
-                    if (isWinningMove()) {
-                        gameOver(1);
                     }
                 }
             }
@@ -177,7 +229,8 @@ class BoardGUI {
                 if (devMode) {
                     showBombs();
                 }
-                mouseButton1Action();
+                altMouseButton1Action();
+                setMouseButton1Action();
             }
 
             private boolean isWinningMove() {
@@ -253,6 +306,25 @@ class BoardGUI {
         });
         restartButton.setFocusable(false);
         systemPanel.add(restartButton);
+        JButton speedFlagButton = new JButton();
+        if (speedFlagMode) {
+            speedFlagButton.setBackground(selectedButtonColor);
+        } else {
+            speedFlagButton.setBackground(defaultButtonColor);
+        }
+        speedFlagButton.setText("^");
+        speedFlagButton.addActionListener(actionEvent -> {
+            if (!speedFlagMode) {
+                speedFlagButton.setBackground(selectedButtonColor);
+                writeFile("SpeedFlag");
+            } else {
+                speedFlagButton.setBackground(defaultButtonColor);
+                writeFile("Normal");
+            }
+            speedFlagMode = !speedFlagMode;
+        });
+        speedFlagButton.setFocusable(false);
+        systemPanel.add(speedFlagButton);
         return systemPanel;
     }
 
@@ -299,10 +371,13 @@ class BoardGUI {
                         minefieldButtons[i][j].setForeground(digitColors[mf.getAdjacent(i, j)]);
                     }
                 } else {
-                    minefieldButtons[i][j].setBackground(alternateTileColors[colorCount % 2]);
+                    flagLabel.setText(mf.getFlagCounter() + "/" + mines);
                     if (mf.isFlagged(i, j)) {
                         minefieldButtons[i][j].setBackground(flaggedTileColor);
                         minefieldButtons[i][j].setText("^");
+                    } else {
+                        minefieldButtons[i][j].setBackground(alternateTileColors[colorCount % 2]);
+                        minefieldButtons[i][j].setText("");
                     }
                 }
                 colorCount++;

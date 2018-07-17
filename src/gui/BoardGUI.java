@@ -18,6 +18,7 @@ class BoardGUI {
 
     private boolean gameActive = false;
     private boolean gameStarted = false;
+    boolean devMode = false;
     private Minefield mf;
     private int rows;
     private int cols;
@@ -25,7 +26,7 @@ class BoardGUI {
     private JButton minefieldButtons[][];
     private Timer timer;
     private JLabel flagLabel;
-    private boolean devMode = false;
+    private JLabel timeLabel;
     private boolean speedFlagMode = false;
     private Color digitColors[] = {Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.CYAN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.BLACK};
     private Color uncoveredTileColor = new Color(0, 190, 255);
@@ -48,14 +49,14 @@ class BoardGUI {
         frame.setLayout(new BorderLayout());
         frame.setSize(cols * 47, rows * 47 + 100);
         frame.setResizable(false);
-        frame.add(minefieldPanel(frame), BorderLayout.CENTER);
+        frame.add(minefieldPanel(), BorderLayout.CENTER);
         frame.add(systemPanel(frame), BorderLayout.SOUTH);
         frame.add(timePanel(), BorderLayout.NORTH);
         frame.setVisible(true);
     }
 
     private void readConfigFile() {
-        File configFile = new File("resources/config_file.txt");
+        File configFile = new File("resources/config/config_file.txt");
         if (configFile.exists()) {
             try {
                 Scanner scanner = new Scanner(configFile);
@@ -81,22 +82,22 @@ class BoardGUI {
 
     private void writeFile(String mode) {
         try {
-            PrintWriter writer = new PrintWriter("resources/config_file.txt");
+            PrintWriter writer = new PrintWriter("resources/config/config_file.txt");
             writer.println(mode);
             writer.close();
         } catch (Exception ignored) {
         }
     }
 
-    private JPanel minefieldPanel(JFrame frame) {
+    private JPanel minefieldPanel() {
         JPanel minefieldPanel = new JPanel();
         minefieldPanel.setLayout(new GridLayout(rows, cols));
         minefieldButtons = new JButton[rows][cols];
-        createMinefieldButtons(minefieldPanel, frame);
+        createMinefieldButtons(minefieldPanel);
         return minefieldPanel;
     }
 
-    private void createMinefieldButtons(JPanel minefieldPanel, JFrame frame) {
+    private void createMinefieldButtons(JPanel minefieldPanel) {
         int colorCount;
         for (int i = 0; i < rows; i++) {
             colorCount = i % 2;
@@ -105,13 +106,13 @@ class BoardGUI {
                 minefieldButtons[i][j].setFocusable(false);
                 minefieldPanel.add(minefieldButtons[i][j]);
                 minefieldButtons[i][j].setBackground(alternateTileColors[colorCount % 2]);
-                addMinefieldButtonActionListeners(i, j, minefieldPanel, frame);
+                addMinefieldButtonActionListeners(i, j, minefieldPanel);
                 colorCount++;
             }
         }
     }
 
-    private void addMinefieldButtonActionListeners(int row, int col, JPanel minefieldPanel, JFrame frame) {
+    private void addMinefieldButtonActionListeners(int row, int col, JPanel minefieldPanel) {
         minefieldButtons[row][col].addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -176,8 +177,8 @@ class BoardGUI {
 
             private void altMouseButton1Action() {
                 if (!mf.isUncovered(row, col) && !mf.isFlagged(row, col)) {
-                    int value = mf.digMine(row, col);
-                    if (value == -1) {
+                    int adjacent = mf.digMine(row, col);
+                    if (adjacent == -1) {
                         gameOver(0);
                     }
                 }
@@ -222,15 +223,39 @@ class BoardGUI {
             }
 
             private void startGame() {
+                initTimer();
                 timer.start();
                 gameStarted = true;
                 gameActive = true;
                 mf.generateMinefield(row, col);
-                if (devMode) {
-                    showBombs();
-                }
                 altMouseButton1Action();
                 setMouseButton1Action();
+            }
+
+            private void initTimer() {
+                timer = new Timer(1000, new ActionListener() {
+                    int count = 1;
+
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        if (gameActive) {
+                            updateTimeLabel(timeLabel, count);
+                            count++;
+                        }
+                    }
+                });
+            }
+
+            private void updateTimeLabel(JLabel timeLabel, int count) {
+                if (count % 60 < 10 && count / 60 < 10) {
+                    timeLabel.setText("0" + count / 60 + ":0" + count % 60);
+                } else if (count % 60 >= 10 && count / 60 < 10) {
+                    timeLabel.setText("0" + count / 60 + ":" + count % 60);
+                } else if (count % 60 < 10 && count / 60 >= 10) {
+                    timeLabel.setText(count / 60 + ":0" + count % 60);
+                } else if (count % 60 >= 10 && count / 60 >= 10) {
+                    timeLabel.setText(count / 60 + ":" + count % 60);
+                }
             }
 
             private boolean isWinningMove() {
@@ -245,23 +270,7 @@ class BoardGUI {
                 } else if (status == 1) {
                     JOptionPane.showMessageDialog(minefieldPanel, "You win!");
                 }
-                frame.dispose();
-                new BoardGUI(rows, cols, mines);
-            }
-
-            private void showBombs() {
-                for (int i = 0; i < rows; i++) {
-                    for (int j = 0; j < cols; j++) {
-                        if (mf.getAdjacent(i, j) == -1) {
-                            if (!mf.isFlagged(i, j)) {
-                                minefieldButtons[i][j].setText("*");
-                            }
-                        } else if (mf.isFlagged(i, j)) {
-                            minefieldButtons[i][j].setBackground(Color.RED);
-                            minefieldButtons[i][j].setText("x");
-                        }
-                    }
-                }
+                restartGame();
             }
 
         });
@@ -301,8 +310,8 @@ class BoardGUI {
         JButton restartButton = new JButton();
         restartButton.setText("Restart");
         restartButton.addActionListener(actionEvent -> {
-            frame.dispose();
-            new BoardGUI(rows, cols, mines);
+            timer.stop();
+            restartGame();
         });
         restartButton.setFocusable(false);
         systemPanel.add(restartButton);
@@ -330,33 +339,10 @@ class BoardGUI {
 
     private JPanel timePanel() {
         JPanel timePanel = new JPanel();
-        JLabel timeLabel = new JLabel();
+        timeLabel = new JLabel();
         timeLabel.setText("00:00");
         timePanel.add(timeLabel);
-        timer = new Timer(1000, new ActionListener() {
-            int count = 1;
-
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (gameActive) {
-                    updateTimeLabel(timeLabel, count);
-                    count++;
-                }
-            }
-        });
         return timePanel;
-    }
-
-    private void updateTimeLabel(JLabel timeLabel, int count) {
-        if (count % 60 < 10 && count / 60 < 10) {
-            timeLabel.setText("0" + count / 60 + ":0" + count % 60);
-        } else if (count % 60 >= 10 && count / 60 < 10) {
-            timeLabel.setText("0" + count / 60 + ":" + count % 60);
-        } else if (count % 60 < 10 && count / 60 >= 10) {
-            timeLabel.setText(count / 60 + ":0" + count % 60);
-        } else if (count % 60 >= 10 && count / 60 >= 10) {
-            timeLabel.setText(count / 60 + ":" + count % 60);
-        }
     }
 
     private void repaintBoard() {
@@ -374,6 +360,7 @@ class BoardGUI {
                     flagLabel.setText(mf.getFlagCounter() + "/" + mines);
                     if (mf.isFlagged(i, j)) {
                         minefieldButtons[i][j].setBackground(flaggedTileColor);
+                        minefieldButtons[i][j].setForeground(digitColors[0]);
                         minefieldButtons[i][j].setText("^");
                     } else {
                         minefieldButtons[i][j].setBackground(alternateTileColors[colorCount % 2]);
@@ -381,6 +368,26 @@ class BoardGUI {
                     }
                 }
                 colorCount++;
+            }
+        }
+        if (devMode) {
+            showBombs();
+        }
+    }
+
+    private void showBombs() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (mf.getAdjacent(i, j) == -1) {
+                    if (!mf.isFlagged(i, j)) {
+                        minefieldButtons[i][j].setForeground(digitColors[0]);
+                        minefieldButtons[i][j].setText("*");
+                    }
+                } else if (mf.isFlagged(i, j)) {
+                    minefieldButtons[i][j].setForeground(digitColors[0]);
+                    minefieldButtons[i][j].setBackground(Color.RED);
+                    minefieldButtons[i][j].setText("x");
+                }
             }
         }
     }
@@ -392,6 +399,14 @@ class BoardGUI {
                 minefieldButtons[i][j].setText("");
             }
         }
+    }
+
+    private void restartGame() {
+        mf = new Minefield(rows, cols, mines);
+        timeLabel.setText("00:00");
+        gameStarted = false;
+        gameActive = false;
+        repaintBoard();
     }
 
 }

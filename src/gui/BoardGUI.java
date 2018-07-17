@@ -18,7 +18,7 @@ class BoardGUI {
 
     private boolean gameActive = false;
     private boolean gameStarted = false;
-    boolean devMode = false;
+    private boolean devMode = false;
     private Minefield mf;
     private int rows;
     private int cols;
@@ -27,6 +27,8 @@ class BoardGUI {
     private Timer timer;
     private JLabel flagLabel;
     private JLabel timeLabel;
+    private Image flagImage;
+    private Image mineImage;
     private boolean speedFlagMode = false;
     private Color digitColors[] = {Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.CYAN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.BLACK};
     private Color uncoveredTileColor = new Color(0, 190, 255);
@@ -44,6 +46,12 @@ class BoardGUI {
         this.cols = cols;
         this.mines = mines;
         mf = new Minefield(rows, cols, mines);
+        java.net.URL imgURL = game.Minesweeper.class.getResource("resources/images/flag.png");
+        if (imgURL == null) {
+            System.out.println("no image");
+        }
+        flagImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/flag.png")).getScaledInstance(30,30, Image.SCALE_SMOOTH);
+        mineImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/mine.png")).getScaledInstance(30,30, Image.SCALE_SMOOTH);
         JFrame frame = new JFrame(cols + "x" + rows + " - " + mines + "*");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -56,7 +64,7 @@ class BoardGUI {
     }
 
     private void readConfigFile() {
-        File configFile = new File("resources/config/config_file.txt");
+        File configFile = new File("config/config_file.txt");
         if (configFile.exists()) {
             try {
                 Scanner scanner = new Scanner(configFile);
@@ -82,7 +90,7 @@ class BoardGUI {
 
     private void writeFile(String mode) {
         try {
-            PrintWriter writer = new PrintWriter("resources/config/config_file.txt");
+            PrintWriter writer = new PrintWriter("config/config_file.txt");
             writer.println(mode);
             writer.close();
         } catch (Exception ignored) {
@@ -360,11 +368,11 @@ class BoardGUI {
                     flagLabel.setText(mf.getFlagCounter() + "/" + mines);
                     if (mf.isFlagged(i, j)) {
                         minefieldButtons[i][j].setBackground(flaggedTileColor);
-                        minefieldButtons[i][j].setForeground(digitColors[0]);
-                        minefieldButtons[i][j].setText("^");
+                        minefieldButtons[i][j].setIcon(new ImageIcon(flagImage));
                     } else {
                         minefieldButtons[i][j].setBackground(alternateTileColors[colorCount % 2]);
                         minefieldButtons[i][j].setText("");
+                        minefieldButtons[i][j].setIcon(null);
                     }
                 }
                 colorCount++;
@@ -380,10 +388,10 @@ class BoardGUI {
             for (int j = 0; j < cols; j++) {
                 if (mf.getAdjacent(i, j) == -1) {
                     if (!mf.isFlagged(i, j)) {
-                        minefieldButtons[i][j].setForeground(digitColors[0]);
-                        minefieldButtons[i][j].setText("*");
+                        minefieldButtons[i][j].setIcon(new ImageIcon(mineImage));
                     }
                 } else if (mf.isFlagged(i, j)) {
+                    minefieldButtons[i][j].setIcon(null);
                     minefieldButtons[i][j].setForeground(digitColors[0]);
                     minefieldButtons[i][j].setBackground(Color.RED);
                     minefieldButtons[i][j].setText("x");

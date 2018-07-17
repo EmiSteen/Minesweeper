@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="040fd83c-d33e-4c80-b01f-3880d3940a6c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/config_file.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/flag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/mine.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/game/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/config/config_file.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/flag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/images/mine.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Minesweeper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/BoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/BoardGUI.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -21,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/game/Main.java">
+      <file leaf-file-name="Minesweeper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/game/Minesweeper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            <state relative-caret-position="90">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -36,7 +41,7 @@
       <file leaf-file-name="MenuGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/MenuGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
+            <state relative-caret-position="105">
               <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -48,8 +53,8 @@
       <file leaf-file-name="BoardGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/BoardGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="312" column="25" selection-start-line="312" selection-start-column="25" selection-end-line="312" selection-end-column="25" />
+            <state relative-caret-position="2307">
+              <caret line="389" column="46" selection-start-line="389" selection-start-column="46" selection-end-line="389" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -117,6 +122,7 @@
         <option value="$PROJECT_DIR$/src/BoardGUI.java" />
         <option value="$PROJECT_DIR$/src/game/Minefield.java" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/game/Minesweeper.java" />
         <option value="$PROJECT_DIR$/src/gui/BoardGUI.java" />
       </list>
     </option>
@@ -131,7 +137,7 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="1680" />
+    <option name="x" value="1280" />
     <option name="y" value="-571" />
     <option name="width" value="1920" />
     <option name="height" value="1080" />
@@ -184,7 +190,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="Application.Minesweeper">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -203,6 +209,17 @@
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Minesweeper" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="Minesweeper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="game.Minesweeper" />
+      <module name="Minesweeper" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -318,9 +335,11 @@
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.Main (1)" />
+      <item itemvalue="Application.Minesweeper" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Minesweeper" />
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
       </list>
@@ -356,7 +375,7 @@
       <workItem from="1531238368092" duration="894000" />
       <workItem from="1531481404361" duration="8672000" />
       <workItem from="1531518241012" duration="1424000" />
-      <workItem from="1531519732217" duration="19221000" />
+      <workItem from="1531519732217" duration="24099000" />
     </task>
     <task id="LOCAL-00001" summary="Changed Board Sizes and cleaned up code">
       <created>1527181689456</created>
@@ -411,7 +430,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69041000" />
+    <option name="totallyTimeSpent" value="73919000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -428,7 +447,7 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32909605" />
-      <window_info anchor="bottom" id="Messages" order="8" sideWeight="0.4948787" weight="0.32924336" />
+      <window_info anchor="bottom" id="Messages" order="8" sideWeight="0.4948787" weight="0.32879376" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
@@ -437,7 +456,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.328877" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49296874" visible="true" weight="0.31322956" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49453124" weight="0.47394788" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49453124" weight="0.47373542" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.3734375" />
@@ -545,10 +564,6 @@
     <entry file="file://$PROJECT_DIR$/src/Minefield.java" />
     <entry file="file://$PROJECT_DIR$/src/MenuGUI.java" />
     <entry file="file://$PROJECT_DIR$/src/BoardGUI.java" />
-    <entry file="file://$PROJECT_DIR$/src/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/Minefield.java" />
-    <entry file="file://$PROJECT_DIR$/src/MenuGUI.java" />
-    <entry file="file://$PROJECT_DIR$/src/BoardGUI.java" />
     <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/javax/swing/SpinnerNumberModel.class" />
     <entry file="file://$PROJECT_DIR$/src/MenuGUI.java" />
     <entry file="file://$PROJECT_DIR$/src/BoardGUI.java" />
@@ -599,36 +614,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="60">
-            <caret line="4" column="164" selection-start-line="4" selection-start-column="164" selection-end-line="4" selection-end-column="164" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/MenuGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/game/Minefield.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1350">
@@ -655,10 +640,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home/lib/src.zip!/java.desktop/sun/awt/image/ImageFetcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="175" selection-start-line="175" selection-end-line="175" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home/lib/src.zip!/java.desktop/sun/awt/image/InputStreamImageSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="262" selection-start-line="262" selection-end-line="262" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="90">
+            <caret line="6" column="54" selection-start-line="6" selection-start-column="54" selection-end-line="6" selection-end-column="54" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MenuGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/Minesweeper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/images/flag.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home/lib/src.zip!/java.desktop/sun/awt/image/URLImageSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1035">
+          <caret line="100" column="19" selection-start-line="100" selection-start-column="16" selection-end-line="100" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/BoardGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="312" column="25" selection-start-line="312" selection-start-column="25" selection-end-line="312" selection-end-column="25" />
+        <state relative-caret-position="2307">
+          <caret line="389" column="46" selection-start-line="389" selection-start-column="46" selection-end-line="389" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

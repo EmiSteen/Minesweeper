@@ -3,7 +3,7 @@ package game;
 import javax.swing.*;
 import gui.MenuGUI;
 
-public class Main {
+public class Minesweeper {
 
     public static void main(String args[]) {
         try {

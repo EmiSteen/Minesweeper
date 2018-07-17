@@ -12,13 +12,11 @@ import java.util.Scanner;
 
 import game.Minefield;
 
-// todo: replace flags and mines with images
-
 class BoardGUI {
 
     private boolean gameActive = false;
     private boolean gameStarted = false;
-    private boolean devMode = false;
+    private boolean devMode;
     private Minefield mf;
     private int rows;
     private int cols;
@@ -29,6 +27,7 @@ class BoardGUI {
     private JLabel timeLabel;
     private Image flagImage;
     private Image mineImage;
+    private JButton pauseButton;
     private boolean speedFlagMode = false;
     private Color digitColors[] = {Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.CYAN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.BLACK};
     private Color uncoveredTileColor = new Color(0, 190, 255);
@@ -42,14 +41,11 @@ class BoardGUI {
 
     BoardGUI(int rows, int cols, int mines) {
         readConfigFile();
+        devMode = false;
         this.rows = rows;
         this.cols = cols;
         this.mines = mines;
         mf = new Minefield(rows, cols, mines);
-        java.net.URL imgURL = game.Minesweeper.class.getResource("resources/images/flag.png");
-        if (imgURL == null) {
-            System.out.println("no image");
-        }
         flagImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/flag.png")).getScaledInstance(30,30, Image.SCALE_SMOOTH);
         mineImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/mine.png")).getScaledInstance(30,30, Image.SCALE_SMOOTH);
         JFrame frame = new JFrame(cols + "x" + rows + " - " + mines + "*");
@@ -133,10 +129,6 @@ class BoardGUI {
                 } else if (!gameStarted && mouseEvent.getButton() == 1) {
                     startGame();
                 }
-                repaintBoard();
-                if (isWinningMove()) {
-                    gameOver(1);
-                }
             }
 
             @Override
@@ -163,6 +155,7 @@ class BoardGUI {
                 } else if (mouseEvent.getButton() == 3) {
                     mouseButton3Action();
                 }
+                endClick();
             }
 
             private void speedFlagButtonAction(MouseEvent mouseEvent) {
@@ -171,6 +164,7 @@ class BoardGUI {
                 } else if (mouseEvent.getButton() == 3) {
                     altMouseButton1Action();
                 }
+                endClick();
             }
 
             private void normalMouseButton1Action() {
@@ -220,7 +214,6 @@ class BoardGUI {
             }
 
             private void mouseButton3Action() {
-                // todo: make second right click on a covered block a question flag
                 if (!mf.isUncovered(row, col)) {
                     if (mf.isFlagged(row, col)) {
                         mf.unflag(row, col);
@@ -238,6 +231,7 @@ class BoardGUI {
                 mf.generateMinefield(row, col);
                 altMouseButton1Action();
                 setMouseButton1Action();
+                endClick();
             }
 
             private void initTimer() {
@@ -263,6 +257,13 @@ class BoardGUI {
                     timeLabel.setText(count / 60 + ":0" + count % 60);
                 } else if (count % 60 >= 10 && count / 60 >= 10) {
                     timeLabel.setText(count / 60 + ":" + count % 60);
+                }
+            }
+
+            private void endClick() {
+                repaintBoard();
+                if (isWinningMove()) {
+                    gameOver(1);
                 }
             }
 
@@ -297,7 +298,7 @@ class BoardGUI {
         });
         changeBoardButton.setFocusable(false);
         systemPanel.add(changeBoardButton);
-        JButton pauseButton = new JButton();
+        pauseButton = new JButton();
         pauseButton.setText("Pause");
         pauseButton.addActionListener(actionEvent -> {
                     if (gameStarted) {
@@ -403,6 +404,7 @@ class BoardGUI {
     private void setBlankBoard() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
+                minefieldButtons[i][j].setIcon(null);
                 minefieldButtons[i][j].setBackground(pausedTileColor);
                 minefieldButtons[i][j].setText("");
             }
@@ -412,6 +414,7 @@ class BoardGUI {
     private void restartGame() {
         mf = new Minefield(rows, cols, mines);
         timeLabel.setText("00:00");
+        pauseButton.setText("Pause");
         gameStarted = false;
         gameActive = false;
         repaintBoard();

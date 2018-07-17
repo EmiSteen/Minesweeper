@@ -6,42 +6,22 @@ import java.awt.*;
 public class MenuGUI {
 
     public MenuGUI() {
-        JFrame frame = new JFrame("Minesweeper");
+        JFrame frame = new JFrame("Menu");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setSize(250, 400);
         frame.setResizable(false);
         frame.add(selectionPanel(frame), BorderLayout.CENTER);
+        frame.pack();
         frame.setVisible(true);
     }
 
     private JPanel selectionPanel(JFrame frame) {
         JPanel selectionPanel = new JPanel();
         selectionPanel.setLayout(new GridLayout(5, 1));
-        JButton easyButton = new JButton();
-        easyButton.setText("Easy - 8 x 8 - 10 mines");
-        easyButton.addActionListener(actionEvent -> {
-            frame.dispose();
-            new BoardGUI(8, 8, 10);
-        });
-        easyButton.setFocusable(false);
-        selectionPanel.add(easyButton);
-        JButton mediumButton = new JButton();
-        mediumButton.setText("Medium - 16 x 16 - 40 mines");
-        mediumButton.addActionListener(actionEvent -> {
-            frame.dispose();
-            new BoardGUI(16, 16, 40);
-        });
-        mediumButton.setFocusable(false);
-        selectionPanel.add(mediumButton);
-        JButton hardButton = new JButton();
-        hardButton.setText("Hard - 30 x 16 - 99 mines");
-        hardButton.addActionListener(actionEvent -> {
-            frame.dispose();
-            new BoardGUI(16, 30, 99);
-        });
-        hardButton.setFocusable(false);
-        selectionPanel.add(hardButton);
+        createMenuButton(frame, selectionPanel, "Easy", 8, 8, 10);
+        createMenuButton(frame, selectionPanel, "Medium", 16, 16, 40);
+        createMenuButton(frame, selectionPanel, "Hard", 16, 30, 99);
         JButton customButton = new JButton();
         customButton.setText("Custom Board");
         customButton.addActionListener(actionEvent -> {
@@ -51,11 +31,13 @@ public class MenuGUI {
             frame.setVisible(true);
         });
         customButton.setFocusable(false);
+        customButton.setPreferredSize(new Dimension(250, 55));
         selectionPanel.add(customButton);
         JButton quitButton = new JButton();
         quitButton.setText("Quit");
         quitButton.addActionListener(actionEvent -> System.exit(0));
         quitButton.setFocusable(false);
+        quitButton.setPreferredSize(new Dimension(250, 55));
         selectionPanel.add(quitButton);
         return selectionPanel;
     }
@@ -96,6 +78,18 @@ public class MenuGUI {
         backButton.setFocusable(false);
         customPanel.add(backButton);
         return customPanel;
+    }
+
+    private void createMenuButton(JFrame frame, JPanel selectionPanel, String difficulty, int rows, int cols, int mines) {
+        JButton menuButton = new JButton();
+        menuButton.setText(difficulty + " - " + cols + " x " + rows + " - " + mines + " mines");
+        menuButton.addActionListener(actionEvent -> {
+            frame.dispose();
+            new BoardGUI(rows, cols, mines);
+        });
+        menuButton.setFocusable(false);
+        menuButton.setPreferredSize(new Dimension(250, 55));
+        selectionPanel.add(menuButton);
     }
 
 }

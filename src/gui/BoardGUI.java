@@ -46,9 +46,9 @@ class BoardGUI {
         this.cols = cols;
         this.mines = mines;
         mf = new Minefield(rows, cols, mines);
-        flagImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/flag.png")).getScaledInstance(30,30, Image.SCALE_SMOOTH);
-        mineImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/mine.png")).getScaledInstance(30,30, Image.SCALE_SMOOTH);
-        JFrame frame = new JFrame(cols + "x" + rows + " - " + mines + "*");
+        flagImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/flag.png")).getScaledInstance(22,22, Image.SCALE_SMOOTH);
+        mineImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/mine.png")).getScaledInstance(22,22, Image.SCALE_SMOOTH);
+        JFrame frame = new JFrame("Minesweeper - " + cols + "x" + rows + " : " + mines);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setSize(cols * 47, rows * 47 + 100);
@@ -56,6 +56,8 @@ class BoardGUI {
         frame.add(minefieldPanel(), BorderLayout.CENTER);
         frame.add(systemPanel(frame), BorderLayout.SOUTH);
         frame.add(timePanel(), BorderLayout.NORTH);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -108,6 +110,9 @@ class BoardGUI {
             for (int j = 0; j < cols; j++) {
                 minefieldButtons[i][j] = new JButton();
                 minefieldButtons[i][j].setFocusable(false);
+                minefieldButtons[i][j].setPreferredSize(new Dimension(35,35));
+                minefieldButtons[i][j].setMargin(new Insets(0,0,0,0));
+                minefieldButtons[i][j].setFont(new Font("Ariel", Font.BOLD, 10));
                 minefieldPanel.add(minefieldButtons[i][j]);
                 minefieldButtons[i][j].setBackground(alternateTileColors[colorCount % 2]);
                 addMinefieldButtonActionListeners(i, j, minefieldPanel);

@@ -28,6 +28,7 @@ class BoardGUI {
     private final Image flagImage;
     private final Image mineImage;
     private JButton pauseButton;
+    private JButton restartButton;
     private boolean speedFlagMode = false;
     private final Color digitColors[] = {Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.CYAN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.BLACK};
     private final Color uncoveredTileColor = new Color(0, 190, 255);
@@ -234,6 +235,7 @@ class BoardGUI {
                 gameStarted = true;
                 gameActive = true;
                 pauseButton.setEnabled(true);
+                restartButton.setEnabled(true);
                 mf.generateMinefield(row, col);
                 altMouseButton1Action();
                 setMouseButton1Action();
@@ -321,8 +323,9 @@ class BoardGUI {
         );
         pauseButton.setFocusable(false);
         systemPanel.add(pauseButton);
-        JButton restartButton = new JButton();
+        restartButton = new JButton();
         restartButton.setText("Restart");
+        restartButton.setEnabled(false);
         restartButton.addActionListener(actionEvent -> {
             timer.stop();
             restartGame();
@@ -425,6 +428,7 @@ class BoardGUI {
         pauseButton.setText("Pause");
         gameStarted = false;
         gameActive = false;
+        restartButton.setEnabled(false);
         repaintBoard();
     }
 

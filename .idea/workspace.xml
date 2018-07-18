@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="040fd83c-d33e-4c80-b01f-3880d3940a6c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/game/Minefield.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/game/Minefield.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/gui/BoardGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/Minefield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Minefield.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/BoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/BoardGUI.java" afterDir="false" />
-    </list>
+    <list default="true" id="040fd83c-d33e-4c80-b01f-3880d3940a6c" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,8 +42,8 @@
       <file leaf-file-name="BoardGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/BoardGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="338" column="99" selection-start-line="338" selection-start-column="99" selection-end-line="338" selection-end-column="99" />
+            <state relative-caret-position="5415">
+              <caret line="361" column="30" selection-start-line="361" selection-start-column="30" selection-end-line="361" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -62,7 +54,7 @@
       <file leaf-file-name="Minefield.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/Minefield.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1110">
+            <state relative-caret-position="1125">
               <caret line="77" column="30" selection-start-line="77" selection-start-column="30" selection-end-line="77" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -119,10 +111,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="1280" />
-    <option name="y" value="-634" />
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -341,7 +331,7 @@
       <workItem from="1531840410392" duration="5810000" />
       <workItem from="1531887809086" duration="757000" />
       <workItem from="1531898373736" duration="4717000" />
-      <workItem from="1531943894610" duration="3995000" />
+      <workItem from="1531943894610" duration="4377000" />
     </task>
     <task id="LOCAL-00001" summary="Changed Board Sizes and cleaned up code">
       <created>1527181689456</created>
@@ -396,7 +386,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92490000" />
+    <option name="totallyTimeSpent" value="92872000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -408,7 +398,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1280" y="-634" width="1920" height="1080" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -420,9 +410,9 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50703126" side_tool="true" weight="0.32486632" />
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49296874" visible="true" weight="0.31322956" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49296874" weight="0.31322956" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.328877" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49453124" weight="0.47326204" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49453124" weight="0.47276264" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.3734375" />
@@ -634,7 +624,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game/Minefield.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
+        <state relative-caret-position="1125">
           <caret line="77" column="30" selection-start-line="77" selection-start-column="30" selection-end-line="77" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -644,8 +634,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/BoardGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="338" column="99" selection-start-line="338" selection-start-column="99" selection-end-line="338" selection-end-column="99" />
+        <state relative-caret-position="5415">
+          <caret line="361" column="30" selection-start-line="361" selection-start-column="30" selection-end-line="361" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

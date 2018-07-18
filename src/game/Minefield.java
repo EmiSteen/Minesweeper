@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Minefield {
-    private int minefield[][];
+    private final int minefield[][];
     private int state[][];
     private int correctFlagCounter = 0;
     private int flagCounter = 0;
     private int numUncovered = 0;
-    private int rows;
-    private int cols;
-    private int numMines;
+    private final int rows;
+    private final int cols;
+    private final int numMines;
 
     public Minefield(int rows, int cols, int mines) {
         this.rows = rows;
@@ -22,7 +22,6 @@ public class Minefield {
     }
 
     public void generateMinefield(int row, int col) {
-        minefield = new int[this.rows][this.cols];
         int availableMineBlockCount = getAvailableMineBlockCount(row, col);
         List<Integer> availableMineBlockPosition = new ArrayList<>(availableMineBlockCount);
         createAvailablePositionArrayList(row, col, availableMineBlockPosition);

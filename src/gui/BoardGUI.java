@@ -16,28 +16,28 @@ class BoardGUI {
 
     private boolean gameActive = false;
     private boolean gameStarted = false;
-    private boolean devMode;
+    private final boolean devMode;
     private Minefield mf;
-    private int rows;
-    private int cols;
-    private int mines;
+    private final int rows;
+    private final int cols;
+    private final int mines;
     private JButton minefieldButtons[][];
     private Timer timer;
     private JLabel flagLabel;
     private JLabel timeLabel;
-    private Image flagImage;
-    private Image mineImage;
+    private final Image flagImage;
+    private final Image mineImage;
     private JButton pauseButton;
     private boolean speedFlagMode = false;
-    private Color digitColors[] = {Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.CYAN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.BLACK};
-    private Color uncoveredTileColor = new Color(0, 190, 255);
+    private final Color digitColors[] = {Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.CYAN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.BLACK};
+    private final Color uncoveredTileColor = new Color(0, 190, 255);
     // unused tile colors
-    // private Color alternateTileColors[] = {new Color(180,180,180), new Color(255, 255, 255)};
-    private Color alternateTileColors[] = {new Color(255, 255, 255), new Color(255, 255, 255)};
-    private Color pausedTileColor = new Color(113, 113, 114);
-    private Color flaggedTileColor = Color.yellow;
-    private Color defaultButtonColor = new Color(125, 125, 125);
-    private Color selectedButtonColor = new Color(150, 100, 140);
+    // private final Color alternateTileColors[] = {new Color(180,180,180), new Color(255, 255, 255)};
+    private final Color alternateTileColors[] = {new Color(255, 255, 255), new Color(255, 255, 255)};
+    private final Color pausedTileColor = new Color(113, 113, 114);
+    private final Color flaggedTileColor = Color.yellow;
+    private final Color defaultButtonColor = new Color(125, 125, 125);
+    private final Color selectedButtonColor = Color.yellow;
 
     BoardGUI(int rows, int cols, int mines) {
         readConfigFile();
@@ -48,7 +48,7 @@ class BoardGUI {
         mf = new Minefield(rows, cols, mines);
         flagImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/flag.png")).getScaledInstance(22,22, Image.SCALE_SMOOTH);
         mineImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/mine.png")).getScaledInstance(22,22, Image.SCALE_SMOOTH);
-        JFrame frame = new JFrame("Minesweeper - " + cols + "x" + rows + " : " + mines);
+        final JFrame frame = new JFrame("Minesweeper - " + cols + "x" + rows + " : " + mines);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setSize(cols * 47, rows * 47 + 100);
@@ -115,13 +115,13 @@ class BoardGUI {
                 minefieldButtons[i][j].setFont(new Font("Ariel", Font.BOLD, 10));
                 minefieldPanel.add(minefieldButtons[i][j]);
                 minefieldButtons[i][j].setBackground(alternateTileColors[colorCount % 2]);
-                addMinefieldButtonActionListeners(i, j, minefieldPanel);
+                addMinefieldButtonActionListeners(i, j);
                 colorCount++;
             }
         }
     }
 
-    private void addMinefieldButtonActionListeners(int row, int col, JPanel minefieldPanel) {
+    private void addMinefieldButtonActionListeners(int row, int col) {
         minefieldButtons[row][col].addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -186,7 +186,7 @@ class BoardGUI {
                 if (!mf.isUncovered(row, col) && !mf.isFlagged(row, col)) {
                     int adjacent = mf.digMine(row, col);
                     if (adjacent == -1) {
-                        gameOver(0);
+                        gameOver();
                     }
                 }
             }
@@ -196,7 +196,7 @@ class BoardGUI {
                     boolean foundMine = digAdjacent();
                     if (foundMine) {
                         repaintBoard();
-                        gameOver(0);
+                        gameOver();
                     }
                 }
             }
@@ -233,6 +233,7 @@ class BoardGUI {
                 timer.start();
                 gameStarted = true;
                 gameActive = true;
+                pauseButton.setEnabled(true);
                 mf.generateMinefield(row, col);
                 altMouseButton1Action();
                 setMouseButton1Action();
@@ -266,9 +267,11 @@ class BoardGUI {
             }
 
             private void endClick() {
-                repaintBoard();
+                if (gameActive) {
+                    repaintBoard();
+                }
                 if (isWinningMove()) {
-                    gameOver(1);
+                    gameOver();
                 }
             }
 
@@ -276,17 +279,12 @@ class BoardGUI {
                 return mf.getCorrectFlagCounter() == mines && mf.getFlagCounter() == mines && mf.getNumUncovered() == rows * cols - mines;
             }
 
-            private void gameOver(int status) {
+            private void gameOver() {
                 timer.stop();
+                gameActive = false;
+                pauseButton.setEnabled(false);
                 showBombs();
-                if (status == 0) {
-                    JOptionPane.showMessageDialog(minefieldPanel, "Game Over!");
-                } else if (status == 1) {
-                    JOptionPane.showMessageDialog(minefieldPanel, "You win!");
-                }
-                restartGame();
             }
-
         });
     }
 
@@ -294,6 +292,7 @@ class BoardGUI {
         JPanel systemPanel = new JPanel();
         flagLabel = new JLabel();
         flagLabel.setText(mf.getFlagCounter() + "/" + mines);
+        flagLabel.setPreferredSize(new Dimension(40,24));
         systemPanel.add(flagLabel);
         JButton changeBoardButton = new JButton();
         changeBoardButton.setText("Change Board");
@@ -305,6 +304,7 @@ class BoardGUI {
         systemPanel.add(changeBoardButton);
         pauseButton = new JButton();
         pauseButton.setText("Pause");
+        pauseButton.setEnabled(false);
         pauseButton.addActionListener(actionEvent -> {
                     if (gameStarted) {
                         if (gameActive) {
@@ -335,7 +335,7 @@ class BoardGUI {
         } else {
             speedFlagButton.setBackground(defaultButtonColor);
         }
-        speedFlagButton.setText("^");
+        speedFlagButton.setIcon(new ImageIcon(flagImage.getScaledInstance(15,15, Image.SCALE_SMOOTH)));
         speedFlagButton.addActionListener(actionEvent -> {
             if (!speedFlagMode) {
                 speedFlagButton.setBackground(selectedButtonColor);
@@ -395,6 +395,8 @@ class BoardGUI {
                 if (mf.getAdjacent(i, j) == -1) {
                     if (!mf.isFlagged(i, j)) {
                         minefieldButtons[i][j].setIcon(new ImageIcon(mineImage));
+                    } else {
+                        minefieldButtons[i][j].setBackground(Color.GREEN);
                     }
                 } else if (mf.isFlagged(i, j)) {
                     minefieldButtons[i][j].setIcon(null);
@@ -418,6 +420,7 @@ class BoardGUI {
 
     private void restartGame() {
         mf = new Minefield(rows, cols, mines);
+        pauseButton.setEnabled(false);
         timeLabel.setText("00:00");
         pauseButton.setText("Pause");
         gameStarted = false;

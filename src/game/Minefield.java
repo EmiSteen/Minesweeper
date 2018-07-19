@@ -3,7 +3,10 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui.BoardGUI;
+
 public class Minefield {
+    private BoardGUI boardGUI;
     private final int minefield[][];
     private int state[][];
     private int correctFlagCounter = 0;
@@ -13,7 +16,8 @@ public class Minefield {
     private final int cols;
     private final int numMines;
 
-    public Minefield(int rows, int cols, int mines) {
+    public Minefield(BoardGUI boardGUI, int rows, int cols, int mines) {
+        this.boardGUI = boardGUI;
         this.rows = rows;
         this.cols = cols;
         this.numMines = mines;
@@ -141,15 +145,16 @@ public class Minefield {
         } else if (!isUncovered(row, col) && !isFlagged(row, col)) {
             calculateAdjacent(row, col);
             uncover(row, col);
-            if (minefield[row][col] == 0) {
-                eliminate(row, col);
-            } else {
+            boardGUI.uncoverMinefieldButtons(minefield[row][col], row, col);
+            if (minefield[row][col] > 0) {
                 return minefield[row][col];
+            } else if (minefield[row][col] == 0) {
+                eliminate(row, col);
             }
+            return 0;
         } else {
             return -2;
         }
-        return -3;
     }
 
     private void eliminate(int row, int col) {

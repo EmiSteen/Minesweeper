@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import game.Minefield;
 
-class BoardGUI {
+public class BoardGUI {
 
     private boolean gameActive = false;
     private boolean gameStarted = false;
@@ -26,7 +26,8 @@ class BoardGUI {
     private JLabel flagLabel;
     private JLabel timeLabel;
     private final Image flagImage;
-    private final Image mineImage;
+    private final ImageIcon flagImageIcon;
+    private final ImageIcon mineImageIcon;
     private JButton pauseButton;
     private JButton restartButton;
     private boolean speedFlagMode = false;
@@ -46,9 +47,11 @@ class BoardGUI {
         this.rows = rows;
         this.cols = cols;
         this.mines = mines;
-        mf = new Minefield(rows, cols, mines);
-        flagImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/flag.png")).getScaledInstance(22,22, Image.SCALE_SMOOTH);
-        mineImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/mine.png")).getScaledInstance(22,22, Image.SCALE_SMOOTH);
+        mf = new Minefield(this, rows, cols, mines);
+        flagImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/flag.png"));
+        flagImageIcon = new ImageIcon(flagImage.getScaledInstance(22,22, Image.SCALE_SMOOTH));
+        Image mineImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/mine.png"));
+        mineImageIcon = new ImageIcon(mineImage.getScaledInstance(22,22, Image.SCALE_SMOOTH));
         final JFrame frame = new JFrame("Minesweeper - " + cols + "x" + rows + " : " + mines);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -187,7 +190,10 @@ class BoardGUI {
                 if (!mf.isUncovered(row, col) && !mf.isFlagged(row, col)) {
                     int adjacent = mf.digMine(row, col);
                     if (adjacent == -1) {
+
                         gameOver();
+                    } else {
+                         uncoverMinefieldButtons(adjacent, row, col);
                     }
                 }
             }
@@ -196,7 +202,6 @@ class BoardGUI {
                 if (mf.isUncovered(row, col) && mf.getAdjacent(row, col) != 0 && mf.countAdjacentFlags(row, col) == mf.getAdjacent(row, col)) {
                     boolean foundMine = digAdjacent();
                     if (foundMine) {
-                        repaintBoard();
                         gameOver();
                     }
                 }
@@ -223,8 +228,13 @@ class BoardGUI {
                 if (!mf.isUncovered(row, col)) {
                     if (mf.isFlagged(row, col)) {
                         mf.unflag(row, col);
+                        minefieldButtons[row][col].setBackground(alternateTileColors[(row%2+col)%2]);
+                        minefieldButtons[row][col].setText("");
+                        minefieldButtons[row][col].setIcon(null);
                     } else {
                         mf.flag(row, col);
+                        minefieldButtons[row][col].setBackground(flaggedTileColor);
+                        minefieldButtons[row][col].setIcon(flagImageIcon);
                     }
                 }
             }
@@ -269,9 +279,6 @@ class BoardGUI {
             }
 
             private void endClick() {
-                if (gameActive) {
-                    repaintBoard();
-                }
                 if (isWinningMove()) {
                     gameOver();
                 }
@@ -282,6 +289,7 @@ class BoardGUI {
             }
 
             private void gameOver() {
+                repaintBoard();
                 timer.stop();
                 gameActive = false;
                 pauseButton.setEnabled(false);
@@ -370,14 +378,14 @@ class BoardGUI {
                 if (mf.isUncovered(i, j)) {
                     minefieldButtons[i][j].setBackground(uncoveredTileColor);
                     if (mf.getAdjacent(i, j) > 0) {
-                        minefieldButtons[i][j].setText(mf.getAdjacent(i, j) + "");
                         minefieldButtons[i][j].setForeground(digitColors[mf.getAdjacent(i, j)]);
+                        minefieldButtons[i][j].setText(mf.getAdjacent(i, j) + "");
                     }
                 } else {
                     flagLabel.setText(mf.getFlagCounter() + "/" + mines);
                     if (mf.isFlagged(i, j)) {
                         minefieldButtons[i][j].setBackground(flaggedTileColor);
-                        minefieldButtons[i][j].setIcon(new ImageIcon(flagImage));
+                        minefieldButtons[i][j].setIcon(flagImageIcon);
                     } else {
                         minefieldButtons[i][j].setBackground(alternateTileColors[colorCount % 2]);
                         minefieldButtons[i][j].setText("");
@@ -397,7 +405,7 @@ class BoardGUI {
             for (int j = 0; j < cols; j++) {
                 if (mf.getAdjacent(i, j) == -1) {
                     if (!mf.isFlagged(i, j)) {
-                        minefieldButtons[i][j].setIcon(new ImageIcon(mineImage));
+                        minefieldButtons[i][j].setIcon(mineImageIcon);
                     } else {
                         minefieldButtons[i][j].setBackground(Color.GREEN);
                     }
@@ -422,7 +430,7 @@ class BoardGUI {
     }
 
     private void restartGame() {
-        mf = new Minefield(rows, cols, mines);
+        mf = new Minefield(this, rows, cols, mines);
         pauseButton.setEnabled(false);
         timeLabel.setText("00:00");
         pauseButton.setText("Pause");
@@ -430,6 +438,14 @@ class BoardGUI {
         gameActive = false;
         restartButton.setEnabled(false);
         repaintBoard();
+    }
+
+    public void uncoverMinefieldButtons(int adjacent, int row, int col) {
+        minefieldButtons[row][col].setBackground(uncoveredTileColor);
+        if (mf.getAdjacent(row, col) > 0) {
+            minefieldButtons[row][col].setForeground(digitColors[adjacent]);
+            minefieldButtons[row][col].setText(adjacent + "");
+        }
     }
 
 }

@@ -164,7 +164,7 @@ public class BoardGUI {
                 } else if (mouseEvent.getButton() == 3) {
                     mouseButton3Action();
                 }
-                endClick();
+                checkForWinningMove();
             }
 
             private void speedFlagButtonAction(MouseEvent mouseEvent) {
@@ -173,7 +173,7 @@ public class BoardGUI {
                 } else if (mouseEvent.getButton() == 3) {
                     altMouseButton1Action();
                 }
-                endClick();
+                checkForWinningMove();
             }
 
             private void normalMouseButton1Action() {
@@ -236,6 +236,7 @@ public class BoardGUI {
                         minefieldButtons[row][col].setBackground(flaggedTileColor);
                         minefieldButtons[row][col].setIcon(flagImageIcon);
                     }
+                    flagLabel.setText(mf.getFlagCounter() + "/" + mines);
                 }
             }
 
@@ -249,7 +250,6 @@ public class BoardGUI {
                 mf.generateMinefield(row, col);
                 altMouseButton1Action();
                 setMouseButton1Action();
-                endClick();
             }
 
             private void initTimer() {
@@ -278,7 +278,7 @@ public class BoardGUI {
                 }
             }
 
-            private void endClick() {
+            private void checkForWinningMove() {
                 if (isWinningMove()) {
                     gameOver();
                 }

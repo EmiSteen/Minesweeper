@@ -84,6 +84,7 @@ public class BoardGUI {
                 }
                 scanner.close();
             } catch (Exception ignored) {
+                System.exit(1);
             }
         } else {
             writeFile("Normal");
@@ -96,6 +97,7 @@ public class BoardGUI {
             writer.println(mode);
             writer.close();
         } catch (Exception ignored) {
+            System.exit(1);
         }
     }
 
@@ -316,19 +318,18 @@ public class BoardGUI {
         pauseButton.setText("Pause");
         pauseButton.setEnabled(false);
         pauseButton.addActionListener(actionEvent -> {
-                    if (gameStarted) {
-                        if (gameActive) {
-                            pauseButton.setText("Play");
-                            gameActive = false;
-                            setBlankBoard();
-                        } else {
-                            pauseButton.setText("Pause");
-                            repaintBoard();
-                            gameActive = true;
-                        }
-                    }
+            if (gameStarted) {
+                if (gameActive) {
+                    pauseButton.setText("Play");
+                    gameActive = false;
+                    setBlankBoard();
+                } else {
+                    pauseButton.setText("Pause");
+                    repaintBoard();
+                    gameActive = true;
                 }
-        );
+            }
+        });
         pauseButton.setFocusable(false);
         systemPanel.add(pauseButton);
         restartButton = new JButton();

@@ -6,9 +6,10 @@ import java.util.List;
 import gui.BoardGUI;
 
 public class Minefield {
+
     private BoardGUI boardGUI;
     private final int minefield[][];
-    private int state[][];
+    private final int state[][];
     private int correctFlagCounter = 0;
     private int flagCounter = 0;
     private int numUncovered = 0;
@@ -112,15 +113,15 @@ public class Minefield {
     }
 
     public int countAdjacentFlags(int row, int col) {
-        int adjecentFlags = 0;
+        int adjacentFlags = 0;
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 if (isInsideBounds(row, col, i, j) && isFlagged(row+i, col+j)) {
-                    adjecentFlags++;
+                    adjacentFlags++;
                 }
             }
         }
-        return adjecentFlags;
+        return adjacentFlags;
     }
 
     public int getCorrectFlagCounter() {

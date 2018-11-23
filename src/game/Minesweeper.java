@@ -13,5 +13,6 @@ public class Minesweeper {
         }
         new MenuGUI();
     }
+
 }
 

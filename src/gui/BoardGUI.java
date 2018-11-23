@@ -44,14 +44,17 @@ public class BoardGUI {
     BoardGUI(int rows, int cols, int mines) {
         readConfigFile();
         devMode = false;
+        
         this.rows = rows;
         this.cols = cols;
         this.mines = mines;
         mf = new Minefield(this, rows, cols, mines);
+        
         flagImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/flag.png"));
         flagImageIcon = new ImageIcon(flagImage.getScaledInstance(22,22, Image.SCALE_SMOOTH));
         Image mineImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/mine.png"));
         mineImageIcon = new ImageIcon(mineImage.getScaledInstance(22,22, Image.SCALE_SMOOTH));
+        
         final JFrame frame = new JFrame("Minesweeper - " + cols + "x" + rows + " : " + mines);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -180,12 +183,12 @@ public class BoardGUI {
 
             private void normalMouseButton1Action() {
                 altMouseButton1Action();
-                setMouseButton1Action();
+                constantMouseButton1Action();
             }
 
             private void speedMouseButton1Action() {
                 mouseButton3Action();
-                setMouseButton1Action();
+                constantMouseButton1Action();
             }
 
             private void altMouseButton1Action() {
@@ -200,7 +203,7 @@ public class BoardGUI {
                 }
             }
 
-            private void setMouseButton1Action() {
+            private void constantMouseButton1Action() {
                 if (mf.isUncovered(row, col) && mf.getAdjacent(row, col) != 0 && mf.countAdjacentFlags(row, col) == mf.getAdjacent(row, col)) {
                     boolean foundMine = digAdjacent();
                     if (foundMine) {
@@ -251,7 +254,7 @@ public class BoardGUI {
                 restartButton.setEnabled(true);
                 mf.generateMinefield(row, col);
                 altMouseButton1Action();
-                setMouseButton1Action();
+                constantMouseButton1Action();
             }
 
             private void initTimer() {
@@ -302,10 +305,12 @@ public class BoardGUI {
 
     private JPanel systemPanel(JFrame frame) {
         JPanel systemPanel = new JPanel();
+
         flagLabel = new JLabel();
         flagLabel.setText(mf.getFlagCounter() + "/" + mines);
         flagLabel.setPreferredSize(new Dimension(40,24));
         systemPanel.add(flagLabel);
+
         JButton changeBoardButton = new JButton();
         changeBoardButton.setText("Change Board");
         changeBoardButton.addActionListener(actionEvent -> {
@@ -314,6 +319,7 @@ public class BoardGUI {
         });
         changeBoardButton.setFocusable(false);
         systemPanel.add(changeBoardButton);
+
         pauseButton = new JButton();
         pauseButton.setText("Pause");
         pauseButton.setEnabled(false);
@@ -332,6 +338,7 @@ public class BoardGUI {
         });
         pauseButton.setFocusable(false);
         systemPanel.add(pauseButton);
+
         restartButton = new JButton();
         restartButton.setText("Restart");
         restartButton.setEnabled(false);
@@ -341,6 +348,7 @@ public class BoardGUI {
         });
         restartButton.setFocusable(false);
         systemPanel.add(restartButton);
+
         JButton speedFlagButton = new JButton();
         if (speedFlagMode) {
             speedFlagButton.setBackground(selectedButtonColor);
@@ -360,6 +368,7 @@ public class BoardGUI {
         });
         speedFlagButton.setFocusable(false);
         systemPanel.add(speedFlagButton);
+
         return systemPanel;
     }
 

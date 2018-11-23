@@ -19,32 +19,36 @@ public class MenuGUI {
     private JPanel selectionPanel(JFrame frame) {
         JPanel selectionPanel = new JPanel();
         selectionPanel.setLayout(new GridLayout(5, 1));
+
         createMenuButton(frame, selectionPanel, "Easy", 8, 8, 10);
         createMenuButton(frame, selectionPanel, "Medium", 16, 16, 40);
         createMenuButton(frame, selectionPanel, "Hard", 16, 30, 99);
+
         JButton customButton = new JButton();
         customButton.setText("Custom Board");
         customButton.addActionListener(actionEvent -> {
             frame.remove(selectionPanel);
             frame.add(customPanel(frame));
-            frame.repaint();
             frame.setVisible(true);
         });
         customButton.setFocusable(false);
         customButton.setPreferredSize(new Dimension(250, 55));
         selectionPanel.add(customButton);
+
         JButton quitButton = new JButton();
         quitButton.setText("Quit");
         quitButton.addActionListener(actionEvent -> System.exit(0));
         quitButton.setFocusable(false);
         quitButton.setPreferredSize(new Dimension(250, 55));
         selectionPanel.add(quitButton);
+
         return selectionPanel;
     }
 
     private JPanel customPanel(JFrame frame) {
         JPanel customPanel = new JPanel();
         customPanel.setLayout(new GridLayout(5, 1));
+
         JSpinner rowSP = new JSpinner();
         JSpinner colSP = new JSpinner();
         JSpinner mineSP = new JSpinner();
@@ -57,6 +61,7 @@ public class MenuGUI {
         customPanel.add(rowSP);
         customPanel.add(colSP);
         customPanel.add(mineSP);
+
         JButton startButton = new JButton();
         startButton.setText("Start");
         startButton.addActionListener(actionEvent -> {
@@ -68,6 +73,7 @@ public class MenuGUI {
         });
         startButton.setFocusable(false);
         customPanel.add(startButton);
+
         JButton backButton = new JButton();
         backButton.setText("Back");
         backButton.addActionListener(actionEvent -> {
@@ -77,6 +83,7 @@ public class MenuGUI {
         });
         backButton.setFocusable(false);
         customPanel.add(backButton);
+
         return customPanel;
     }
 

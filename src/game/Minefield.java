@@ -7,8 +7,8 @@ import gui.BoardGUI;
 public class Minefield {
 
     private BoardGUI boardGUI;
-    private final int minefield[][];
-    private final int state[][];
+    private final int[][] minefield;
+    private final int[][] state;
     private int correctFlagCounter = 0;
     private int flagCounter = 0;
     private int numUncovered = 0;

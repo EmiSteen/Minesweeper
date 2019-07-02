@@ -2,7 +2,6 @@ package game;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import gui.BoardGUI;
 
 public class Minefield {

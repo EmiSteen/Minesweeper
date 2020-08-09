@@ -205,7 +205,7 @@ public class BoardGUI {
             }
 
             private void constantMouseButton1Action() {
-                if (mf.isUncovered(row, col) && mf.getAdjacent(row, col) != 0 && mf.countAdjacentFlags(row, col) == mf.getAdjacent(row, col)) {
+                if (mf.isUncovered(row, col) && mf.getAdjacentMinesCount(row, col) != 0 && mf.countAdjacentFlags(row, col) == mf.getAdjacentMinesCount(row, col)) {
                     boolean foundMine = digAdjacent();
                     if (foundMine) {
                         gameOver();
@@ -388,9 +388,9 @@ public class BoardGUI {
             for (int j = 0; j < cols; j++) {
                 if (mf.isUncovered(i, j)) {
                     minefieldButtons[i][j].setBackground(uncoveredTileColor);
-                    if (mf.getAdjacent(i, j) > 0) {
-                        minefieldButtons[i][j].setForeground(digitColors[mf.getAdjacent(i, j)]);
-                        minefieldButtons[i][j].setText(mf.getAdjacent(i, j) + "");
+                    if (mf.getAdjacentMinesCount(i, j) > 0) {
+                        minefieldButtons[i][j].setForeground(digitColors[mf.getAdjacentMinesCount(i, j)]);
+                        minefieldButtons[i][j].setText(mf.getAdjacentMinesCount(i, j) + "");
                     }
                 } else {
                     flagLabel.setText(mf.getFlagCounter() + "/" + mines);
@@ -414,7 +414,7 @@ public class BoardGUI {
     private void showBombs() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if (mf.getAdjacent(i, j) == -1) {
+                if (mf.getAdjacentMinesCount(i, j) == -1) {
                     if (!mf.isFlagged(i, j)) {
                         minefieldButtons[i][j].setIcon(mineImageIcon);
                     } else {
@@ -453,7 +453,7 @@ public class BoardGUI {
 
     public void uncoverMinefieldButtons(int adjacent, int row, int col) {
         minefieldButtons[row][col].setBackground(uncoveredTileColor);
-        if (mf.getAdjacent(row, col) > 0) {
+        if (mf.getAdjacentMinesCount(row, col) > 0) {
             minefieldButtons[row][col].setForeground(digitColors[adjacent]);
             minefieldButtons[row][col].setText(adjacent + "");
         }

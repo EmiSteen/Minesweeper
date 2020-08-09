@@ -71,11 +71,11 @@ public class Minefield {
         return (i > row + 1 || i < row - 1) || (j > col + 1 || j < col - 1);
     }
 
-    public int getAdjacent(int row, int col) {
+    public int getAdjacentMinesCount(int row, int col) {
         return minefield[row][col];
     }
 
-    private void calculateAdjacent(int row, int col) {
+    private void calculateAdjacentMinesCount(int row, int col) {
         int adjacent = 0;
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
@@ -143,13 +143,13 @@ public class Minefield {
         if (!isUncovered(row,col) && isMine(row, col) && !isFlagged(row, col)) {
             return -1;
         } else if (!isUncovered(row, col) && !isFlagged(row, col)) {
-            calculateAdjacent(row, col);
+            calculateAdjacentMinesCount(row, col);
             uncover(row, col);
             boardGUI.uncoverMinefieldButtons(minefield[row][col], row, col);
             if (minefield[row][col] > 0) {
                 return minefield[row][col];
             } else if (minefield[row][col] == 0) {
-                eliminate(row, col);
+                digSurroundingMines(row, col);
             }
             return 0;
         } else {
@@ -157,7 +157,7 @@ public class Minefield {
         }
     }
 
-    private void eliminate(int row, int col) {
+    private void digSurroundingMines(int row, int col) {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 if (isInsideBounds(row, col, i, j) && !isUncovered(row + i, col + j)) {

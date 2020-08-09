@@ -3,3 +3,4 @@ META-INF
 .idea
 .DS_Store
 *.iml
+config/config_file.txt

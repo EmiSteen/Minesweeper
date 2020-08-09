@@ -27,6 +27,7 @@ public class BoardGUI {
     private JLabel timeLabel;
     private final Image flagImage;
     private final ImageIcon flagImageIcon;
+    private final Image mineImage;
     private final ImageIcon mineImageIcon;
     private JButton pauseButton;
     private JButton restartButton;
@@ -50,9 +51,9 @@ public class BoardGUI {
         this.mines = mines;
         mf = new Minefield(this, rows, cols, mines);
         
-        flagImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/flag.png"));
+        flagImage = Toolkit.getDefaultToolkit().createImage("resources/images/flag.png");
         flagImageIcon = new ImageIcon(flagImage.getScaledInstance(22,22, Image.SCALE_SMOOTH));
-        Image mineImage = Toolkit.getDefaultToolkit().createImage(game.Minesweeper.class.getResource("resources/images/mine.png"));
+        mineImage = Toolkit.getDefaultToolkit().createImage("resources/images/mine.png");
         mineImageIcon = new ImageIcon(mineImage.getScaledInstance(22,22, Image.SCALE_SMOOTH));
         
         final JFrame frame = new JFrame("Minesweeper - " + cols + "x" + rows + " : " + mines);
